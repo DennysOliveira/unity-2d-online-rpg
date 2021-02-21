@@ -1,27 +1,105 @@
-﻿using Mirror;
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Mirror;
+using UnityEngine.UI;
 
 public class Player : NetworkBehaviour
 {
+    public Entity entity;
     
-    void HandleMovement()
+    [Header("Player UI")]
+    GameObject gameCanvas;
+    public Slider healthSlider;
+    public Slider manaSlider;
+    public Slider staminaSlider;
+    public Slider expSlider;
+
+    void Start()
     {
+        gameCanvas = GameObject.FindWithTag("GameCanvas").GetComponent<GameObject>();
+        
+        if(!isLocalPlayer)
+            Destroy(gameCanvas);
+        
         if(isLocalPlayer)
         {
-            float moveHorizontal = Input.GetAxis("Horizontal");
-            float moveVertical = Input.GetAxis("Vertical");
+            // Grab slider references // GameObject.FindWithTag("HealthSlider").GetComponent<Slider>();
+            healthSlider = GameObject.FindWithTag("HealthSlider").GetComponent<Slider>();
+            manaSlider = GameObject.FindWithTag("ManaSlider").GetComponent<Slider>();
+            staminaSlider = GameObject.FindWithTag("StaminaSlider").GetComponent<Slider>();
+            expSlider = GameObject.FindWithTag("ExperienceSlider").GetComponent<Slider>();
 
-            Vector3 movement = new Vector2(moveHorizontal * 0.1f, moveVertical * 0.1f);
-            transform.position = transform.position + movement;
-            
+            // Sets up entity values according to the Database
+            CmdSetEntityValues();
+
+            // Set slider values according to Entity values
+            healthSlider.value      = entity.curHealth;
+            healthSlider.maxValue   = entity.maxHealth;
+
+            manaSlider.value        = entity.curMana;
+            manaSlider.maxValue     = entity.maxMana;
+
+            staminaSlider.value     = entity.curStamina;
+            staminaSlider.maxValue  = entity.maxStamina;
+
+            expSlider.value = 0;
+        }
+        
+
+    }
+
+    
+    private void Update()
+    {
+        healthSlider.value  = entity.curHealth;
+        manaSlider.value    = entity.curMana;
+        staminaSlider.value = entity.curStamina;
+
+        if(Input.GetKeyDown(KeyCode.Space))
+        {
+            entity.curHealth -= 10;
         }
     }
 
-    void Update()
+    [Command]
+    void CmdSetEntityValues()
     {
-        HandleMovement();
+        // TO-DO: Get values from the database
+        // int dbHealth  = GetValue("health", entity.name);
+        // int dbMana    = GetValue("mana", entity.name);
+        // int dbStamina = GetValue("stamina", entity.name);
 
+        // Set HP/MP/SP values accordingly
+        entity.curHealth  = entity.maxHealth;
+        entity.curMana    = entity.maxMana;
+        entity.curStamina = entity.maxStamina;
     }
+
+    // Commands to get values from the database through the Server
+    // In the future, should get current value from the database when the player logs in.
+    [Command]
+    void CmdGetHealth()
+    {
+        entity.curHealth = entity.maxHealth;
+    }
+
+    [Command]
+    void CmdGetMana()
+    {
+        entity.curHealth = entity.maxHealth;
+    }
+
+    [Command]
+    void CmdGetStamina()
+    {
+        entity.curStamina = entity.maxStamina;
+    }
+
+    [Command]
+    void CmdGetExp()
+    {
+        Debug.Log("Getting EXP Values from the Database...");
+    }
+
 }

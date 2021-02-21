@@ -7,30 +7,37 @@ using Mirror.Experimental;
 [RequireComponent(typeof(NetworkRigidbody2D))]
 [RequireComponent(typeof(Rigidbody2D))]
 [RequireComponent(typeof(Animator))]
+[RequireComponent(typeof(Player))]
 public class PlayerController : NetworkBehaviour
 {
     float input_x = 0;
     float input_y = 0;
-    public float speed = 3.0f;
     bool isWalking = false;
+    Vector2 movement;
+
+    float old_input_x = 0;
+    float old_input_y = 0;
     
+    [HideInInspector] public Player player;
     Rigidbody2D rb2d;
 
     [Header("Animator")]
     public Animator playerAnimator;
+    [SerializeField] private NetworkAnimator networkAnimator;
 
     Camera playerCamera;
     AudioListener audioListener;
 
+    
     void Start()
-    {
-
+    {   
+        // Get and store Component references so we can access them:
+        rb2d = GetComponent<Rigidbody2D>();
+        player = GetComponent<Player>();
+        
         if(isLocalPlayer)
         {
             isWalking = false;
-
-            // Get and store a reference to the Rigidbody2D component so we can access it.
-            rb2d = GetComponent<Rigidbody2D>();
 
             // Setup camera
             playerCamera = GetComponent<Camera>();
@@ -39,14 +46,12 @@ public class PlayerController : NetworkBehaviour
             // Setup Camera and Audio Listener
             playerCamera = GetComponent<Camera>();
             audioListener = GetComponent<AudioListener>();
-
-            
-            
         }
     }
 
     void FixedUpdate()
     {
+        
         if(isLocalPlayer)
         {
             // Check User Input and Validate isWalking
@@ -54,27 +59,55 @@ public class PlayerController : NetworkBehaviour
             input_y = Input.GetAxisRaw("Vertical");
             isWalking = (input_x != 0 || input_y != 0);
 
-            if (isWalking)
-                HandleMovement();
+            // If input has changed since the last update, tell the server:
+            if(input_x != old_input_x || input_y != old_input_y)
+            {    
+                CmdSyncMove(input_x, input_y);
+                old_input_x = input_x;
+                old_input_y = input_y;
+            }
 
-            // Update isWalking State
+            if (isWalking)
+            {
+                // If isWalking, move the player:
+                CmdMove(input_x, input_y);
+
+                // Set input values and hold them set so the Idle animation can use them as is.
+                playerAnimator.SetFloat("input_x", input_x);
+                playerAnimator.SetFloat("input_y", input_y);
+            }
+
+            // Set isWalking if or if not walking - needs Client Authority.
             playerAnimator.SetBool("isWalking", isWalking);
+           
         }
+    }
+
+    // Local function for Client-Authority - will keep it here for testing purposes
+    void HandleMovement()
+    {
+        // Set according to the 
+        Vector2 movement = new Vector2(input_x, input_y);
+
+        // Move the rigidbody locally - Client Authority needs to be checked on NetwTransform
+        rb2d.MovePosition(rb2d.position + movement * player.entity.speed * Time.fixedDeltaTime);
+    }
+            
+    
+
+    [Command]
+    void CmdSyncMove(float input_x, float input_y)
+    {
+        // Calculates Player Movement
+        movement = new Vector2(input_x, input_y);
+    }
+
+    [Command]
+    void CmdMove(float input_x, float input_y)
+    {
+        // Calls the movement on the server with data calculated at server side.
+        rb2d.MovePosition(rb2d.position + movement * player.entity.speed * Time.fixedDeltaTime);
         
     }
 
-    void HandleMovement()
-    {
-        // Set movement
-        Vector2 movement = new Vector2(input_x * 0.4f, input_y * 0.4f);
-
-        // Move 
-        rb2d.MovePosition(rb2d.position + movement * speed * Time.fixedDeltaTime);
-
-        // Animate Movement
-        playerAnimator.SetFloat("input_x", input_x);
-        playerAnimator.SetFloat("input_y", input_y);
-    }
-
-    
 }
