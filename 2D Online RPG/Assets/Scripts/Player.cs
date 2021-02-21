@@ -8,16 +8,17 @@ public class Player : NetworkBehaviour
 {
     public Entity entity;
     
+    
     [Header("Player UI")]
-    GameObject gameCanvas;
     public Slider healthSlider;
     public Slider manaSlider;
     public Slider staminaSlider;
     public Slider expSlider;
+    public Canvas gameCanvas;
 
     void Start()
     {
-        gameCanvas = GameObject.FindWithTag("GameCanvas").GetComponent<GameObject>();
+        gameCanvas = GameObject.FindWithTag("GameCanvas").GetComponent<Canvas>();
         
         if(!isLocalPlayer)
             Destroy(gameCanvas);
@@ -58,7 +59,7 @@ public class Player : NetworkBehaviour
 
         if(Input.GetKeyDown(KeyCode.Space))
         {
-            entity.curHealth -= 10;
+           CmdTakeDamage(10);
         }
     }
 
@@ -102,4 +103,9 @@ public class Player : NetworkBehaviour
         Debug.Log("Getting EXP Values from the Database...");
     }
 
+    [Command]
+    void CmdTakeDamage(int dmg)
+    {
+        entity.curHealth -= dmg;
+    }
 }
