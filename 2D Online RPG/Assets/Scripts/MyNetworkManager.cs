@@ -6,8 +6,6 @@ using Mirror;
 public class MyNetworkManager : NetworkManager
 {
     AudioSource audioSource;
-    AudioListener audioListener;
-    
 
     public override void Start()
     {
@@ -15,18 +13,12 @@ public class MyNetworkManager : NetworkManager
         audioSource = GetComponentInChildren<AudioSource>();
         audioSource.Play();
 
-        audioListener = GetComponentInChildren<AudioListener>();
-        
-
     }
 
     public override void OnClientConnect(NetworkConnection conn)
     {
         base.OnClientConnect(conn);
         audioSource.Stop();
-        audioListener.enabled = false;
-
-        
 
     }
 }

@@ -28,15 +28,23 @@ public class PlayerController : NetworkBehaviour
     Camera playerCamera;
     AudioListener audioListener;
 
-    
+    [Header("Local Player Object")]
+    public GameObject localPlayerObject;
+
     void Start()
     {   
         // Get and store Component references so we can access them:
         rb2d = GetComponent<Rigidbody2D>();
         player = GetComponent<Player>();
+        localPlayerObject = GameObject.Find("Local Player Object");
+
         
         if(isLocalPlayer)
         {
+            // Set up this object into a non-networked object
+            this.name = "Networked Player (Local)";
+            this.transform.parent = localPlayerObject.transform;
+
             isWalking = false;
 
             // Setup camera
@@ -46,6 +54,10 @@ public class PlayerController : NetworkBehaviour
             // Setup Camera and Audio Listener
             playerCamera = GetComponent<Camera>();
             audioListener = GetComponent<AudioListener>();
+        } 
+        else
+        {
+            this.name = "Networked Player (Clone)";
         }
     }
 
