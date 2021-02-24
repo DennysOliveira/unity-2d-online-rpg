@@ -7,29 +7,27 @@ using UnityEngine.UI;
 public class Player : NetworkBehaviour
 {
     public Entity entity;
-    
-    
+
     [Header("Player UI")]
     public Slider healthSlider;
     public Slider manaSlider;
     public Slider staminaSlider;
     public Slider expSlider;
-    public Canvas gameCanvas;
+    
+
+    private GameObject playerHUD;
 
     void Start()
     {
-        gameCanvas = GameObject.FindWithTag("GameCanvas").GetComponent<Canvas>();
-        
-        if(!isLocalPlayer)
-            Destroy(gameCanvas);
+        playerHUD = GameObject.Find("Canvas").gameObject;
         
         if(isLocalPlayer)
         {
             // Grab slider references // GameObject.FindWithTag("HealthSlider").GetComponent<Slider>();
-            healthSlider = GameObject.FindWithTag("HealthSlider").GetComponent<Slider>();
-            manaSlider = GameObject.FindWithTag("ManaSlider").GetComponent<Slider>();
-            staminaSlider = GameObject.FindWithTag("StaminaSlider").GetComponent<Slider>();
-            expSlider = GameObject.FindWithTag("ExperienceSlider").GetComponent<Slider>();
+            healthSlider    = GameObject.Find("Canvas/PlayerUI/PlayerHUD/HealthSlider").GetComponent<Slider>();
+            manaSlider      = GameObject.Find("Canvas/PlayerUI/PlayerHUD/ManaSlider").GetComponent<Slider>();
+            staminaSlider   = GameObject.Find("Canvas/PlayerUI/PlayerHUD/StaminaSlider").GetComponent<Slider>();
+            expSlider       = GameObject.Find("Canvas/PlayerUI/PlayerHUD/ExperienceSlider").GetComponent<Slider>();
 
             // Sets up entity values according to the Database
             CmdSetEntityValues();
@@ -108,4 +106,6 @@ public class Player : NetworkBehaviour
     {
         entity.curHealth -= dmg;
     }
+
+    
 }

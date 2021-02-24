@@ -10,6 +10,7 @@ using Mirror.Experimental;
 [RequireComponent(typeof(Player))]
 public class PlayerController : NetworkBehaviour
 {
+    // Input Control Variables
     float input_x = 0;
     float input_y = 0;
     bool isWalking = false;
@@ -17,27 +18,38 @@ public class PlayerController : NetworkBehaviour
 
     float old_input_x = 0;
     float old_input_y = 0;
-    
-    [HideInInspector] public Player player;
+
+    // Body Variables
     Rigidbody2D rb2d;
 
-    [Header("Animator")]
-    public Animator playerAnimator;
-    [SerializeField] private NetworkAnimator networkAnimator;
-
+    // Entity Variable
+    [HideInInspector] public Player player;
+    
+    // Local Player Vars
     Camera playerCamera;
     AudioListener audioListener;
 
+    // Sprite-related Variables
+    [SyncVar] private bool torchEnabled = false;
+
     [Header("Local Player Object")]
     public GameObject localPlayerObject;
+
+    [Header("Player Animator Controllers")]
+    public RuntimeAnimatorController cntVikingBase;
+    public RuntimeAnimatorController cntVikingTorch;
+
+    [Header("Animator")]
+    public Animator playerAnimator;
 
     void Start()
     {   
         // Get and store Component references so we can access them:
         rb2d = GetComponent<Rigidbody2D>();
         player = GetComponent<Player>();
-        localPlayerObject = GameObject.Find("Local Player Object");
+        
 
+        localPlayerObject = GameObject.Find("Local Player Object");
         
         if(isLocalPlayer)
         {
@@ -54,7 +66,8 @@ public class PlayerController : NetworkBehaviour
             // Setup Camera and Audio Listener
             playerCamera = GetComponent<Camera>();
             audioListener = GetComponent<AudioListener>();
-        } 
+
+    } 
         else
         {
             this.name = "Networked Player (Clone)";
@@ -92,20 +105,13 @@ public class PlayerController : NetworkBehaviour
             // Set isWalking if or if not walking - needs Client Authority.
             playerAnimator.SetBool("isWalking", isWalking);
            
+            if(Input.GetKeyDown(KeyCode.T))
+            {
+                CmdToggleTorch();
+            }
+            
         }
     }
-
-    // Local function for Client-Authority - will keep it here for testing purposes
-    void HandleMovement()
-    {
-        // Set according to the 
-        Vector2 movement = new Vector2(input_x, input_y);
-
-        // Move the rigidbody locally - Client Authority needs to be checked on NetwTransform
-        rb2d.MovePosition(rb2d.position + movement * player.entity.speed * Time.fixedDeltaTime);
-    }
-            
-    
 
     [Command]
     void CmdSyncMove(float input_x, float input_y)
@@ -122,4 +128,24 @@ public class PlayerController : NetworkBehaviour
         
     }
 
+    [Command]
+    void CmdToggleTorch()
+    {
+        if(torchEnabled)
+        {
+            // disable torch
+            playerAnimator.runtimeAnimatorController = cntVikingBase;
+
+            torchEnabled = false;
+
+        } else
+        {
+            // enable torch
+            playerAnimator.runtimeAnimatorController = cntVikingTorch;
+                        
+            torchEnabled = true;
+        }
+        
+    }
+    
 }

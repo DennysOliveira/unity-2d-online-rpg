@@ -8,8 +8,14 @@ public class CameraController : MonoBehaviour
     GameObject sibling;
     Transform sibTransform = null;
 
-    [Header("Camera Controller Config")]
+    [Header("Movement")]
     public float smoothSpeed = 0.125f;
+    public float baseZPosition = 0f;
+
+    [Header("Position Offsets")]
+    public float playerOffsetX = 0f;
+    public float playerOffsetY = 0f;
+    public float playerOffsetZ = 0f;
     
 
 
@@ -26,8 +32,7 @@ public class CameraController : MonoBehaviour
         if(sibTransform == null)
         {
             sibTransform = parent.Find("Networked Player (Local)");
-            Debug.Log("Mylog: " + sibling);
-            
+                        
             if(sibTransform != null)
             {
                 sibling = sibTransform.gameObject;
@@ -38,8 +43,10 @@ public class CameraController : MonoBehaviour
         }
         else if (sibling)
         {
-            Vector3 nextPos = new Vector3(sibling.transform.position.x,
-                                          sibling.transform.position.y, -15);
+            Vector3 nextPos = new Vector3(sibling.transform.position.x + playerOffsetX,
+                                          sibling.transform.position.y + playerOffsetY,
+                                          baseZPosition + playerOffsetZ);
+
             Vector3 smPos = Vector3.Lerp(transform.position, nextPos, smoothSpeed * Time.deltaTime);                                          
             transform.position = smPos;
         }

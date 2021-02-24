@@ -1,79 +1,79 @@
 fileFormatVersion: 2
-guid: 4284a0b6ba50a3a42b973b704aaee91d
+guid: 0f4a01827d366bc47a869bc325c87afd
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 963370536445355227
-    second: Viking_0
+      213: 665996176672911775
+    second: Viking_Torch_0
   - first:
-      213: -2117829947940970758
-    second: Viking_1
+      213: 5201965695113708117
+    second: Viking_Torch_1
   - first:
-      213: -8444859237537194863
-    second: Viking_2
+      213: -3150342922390296087
+    second: Viking_Torch_2
   - first:
-      213: -33009654275885561
-    second: Viking_3
+      213: 8118211533030973818
+    second: Viking_Torch_3
   - first:
-      213: -8996363888596329625
-    second: Viking_4
+      213: -6906976691594566819
+    second: Viking_Torch_4
   - first:
-      213: 1292459066828130303
-    second: Viking_5
+      213: 5505360305701230779
+    second: Viking_Torch_5
   - first:
-      213: -4952894141179169941
-    second: Viking_6
+      213: 2252646667495435901
+    second: Viking_Torch_6
   - first:
-      213: 6984852572200534589
-    second: Viking_7
+      213: -8698377358361293115
+    second: Viking_Torch_7
   - first:
-      213: 6878564874560584591
-    second: Viking_8
+      213: 297035956946500789
+    second: Viking_Torch_8
   - first:
-      213: -5987739418878866519
-    second: Viking_9
+      213: 6986354604097268137
+    second: Viking_Torch_9
   - first:
-      213: -6773892472013000302
-    second: Viking_10
+      213: -4340217300888560291
+    second: Viking_Torch_10
   - first:
-      213: 4572431447191211847
-    second: Viking_11
+      213: 2609358079386331361
+    second: Viking_Torch_11
   - first:
-      213: 7936731207920299716
-    second: Viking_12
+      213: -8091895841060760720
+    second: Viking_Torch_12
   - first:
-      213: -2304765487684453831
-    second: Viking_12
+      213: 6534604938684585208
+    second: Viking_Torch_13
   - first:
-      213: 1415941344086535905
-    second: Viking_14
+      213: 7071485063497701665
+    second: Viking_Torch_14
   - first:
-      213: 2073148550267740076
-    second: Viking_15
+      213: -1615061213490093047
+    second: Viking_Torch_15
   - first:
-      213: -3891075953697413570
-    second: Viking_16
+      213: 7092049108100305557
+    second: Viking_Torch_16
   - first:
-      213: -7984047386271051058
-    second: Viking_17
+      213: -5003745464202162969
+    second: Viking_Torch_17
   - first:
-      213: -37775792506003034
-    second: Viking_18
+      213: -6004441947285825084
+    second: Viking_Torch_18
   - first:
-      213: -2863969216818621466
-    second: Viking_19
+      213: 4047863102694789821
+    second: Viking_Torch_19
   - first:
-      213: -8214391333964495351
-    second: Viking_20
+      213: -9138827919380704624
+    second: Viking_Torch_20
   - first:
-      213: -8024310694178970926
-    second: Viking_21
+      213: 1718335015875753909
+    second: Viking_Torch_21
   - first:
-      213: -3651384474030938387
-    second: Viking_22
+      213: -178961896991316385
+    second: Viking_Torch_22
   - first:
-      213: -2803379698228475822
-    second: Viking_23
+      213: 2214997001363653150
+    second: Viking_Torch_23
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -133,8 +133,8 @@ TextureImporter:
   platformSettings:
   - serializedVersion: 3
     buildTarget: DefaultTexturePlatform
-    maxTextureSize: 2048
-    resizeAlgorithm: 1
+    maxTextureSize: 512
+    resizeAlgorithm: 0
     textureFormat: -1
     textureCompression: 0
     compressionQuality: 50
@@ -145,8 +145,8 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
     buildTarget: Standalone
-    maxTextureSize: 2048
-    resizeAlgorithm: 1
+    maxTextureSize: 512
+    resizeAlgorithm: 0
     textureFormat: -1
     textureCompression: 0
     compressionQuality: 50
@@ -159,7 +159,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Viking_0
+      name: Viking_Torch_0
       rect:
         serializedVersion: 2
         x: 0
@@ -173,14 +173,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: bd427e316649e5d00800000000000000
-      internalID: 963370536445355227
+      spriteID: f917b5c7ef71e3900800000000000000
+      internalID: 665996176672911775
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Viking_1
+      name: Viking_Torch_1
       rect:
         serializedVersion: 2
         x: 48
@@ -194,14 +194,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: afe5b4212e4fb92e0800000000000000
-      internalID: -2117829947940970758
+      spriteID: 552450f0d38113840800000000000000
+      internalID: 5201965695113708117
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Viking_2
+      name: Viking_Torch_2
       rect:
         serializedVersion: 2
         x: 96
@@ -215,14 +215,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 19c5b682445ddca80800000000000000
-      internalID: -8444859237537194863
+      spriteID: 9e9a246adcbb744d0800000000000000
+      internalID: -3150342922390296087
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Viking_3
+      name: Viking_Torch_3
       rect:
         serializedVersion: 2
         x: 144
@@ -236,14 +236,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 7063ab2f4e9ba8ff0800000000000000
-      internalID: -33009654275885561
+      spriteID: a716acd806ea9a070800000000000000
+      internalID: 8118211533030973818
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Viking_4
+      name: Viking_Torch_4
       rect:
         serializedVersion: 2
         x: 0
@@ -257,14 +257,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 76b501645be762380800000000000000
-      internalID: -8996363888596329625
+      spriteID: d536a913b4d7520a0800000000000000
+      internalID: -6906976691594566819
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Viking_5
+      name: Viking_Torch_5
       rect:
         serializedVersion: 2
         x: 48
@@ -278,14 +278,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: ff7060d6cacbfe110800000000000000
-      internalID: 1292459066828130303
+      spriteID: bb89bd58708f66c40800000000000000
+      internalID: 5505360305701230779
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Viking_6
+      name: Viking_Torch_6
       rect:
         serializedVersion: 2
         x: 96
@@ -299,14 +299,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: b63f6e82509c34bb0800000000000000
-      internalID: -4952894141179169941
+      spriteID: d7e68848532034f10800000000000000
+      internalID: 2252646667495435901
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Viking_7
+      name: Viking_Torch_7
       rect:
         serializedVersion: 2
         x: 144
@@ -320,14 +320,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: d328c76386e2fe060800000000000000
-      internalID: 6984852572200534589
+      spriteID: 5ce0398e0e7294780800000000000000
+      internalID: -8698377358361293115
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Viking_8
+      name: Viking_Torch_8
       rect:
         serializedVersion: 2
         x: 0
@@ -341,14 +341,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: f8bb9a82f42957f50800000000000000
-      internalID: 6878564874560584591
+      spriteID: 5bc705b01a84f1400800000000000000
+      internalID: 297035956946500789
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Viking_9
+      name: Viking_Torch_9
       rect:
         serializedVersion: 2
         x: 48
@@ -362,14 +362,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 9ab0f1219b647eca0800000000000000
-      internalID: -5987739418878866519
+      spriteID: 9a9e1244f7484f060800000000000000
+      internalID: 6986354604097268137
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Viking_10
+      name: Viking_Torch_10
       rect:
         serializedVersion: 2
         x: 96
@@ -383,14 +383,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 291f8f2bfac4ef1a0800000000000000
-      internalID: -6773892472013000302
+      spriteID: d5d588c3c5374c3c0800000000000000
+      internalID: -4340217300888560291
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Viking_11
+      name: Viking_Torch_11
       rect:
         serializedVersion: 2
         x: 144
@@ -404,14 +404,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 74f48a9ec2a847f30800000000000000
-      internalID: 4572431447191211847
+      spriteID: 1e82e95295d463420800000000000000
+      internalID: 2609358079386331361
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Viking_13
+      name: Viking_Torch_12
       rect:
         serializedVersion: 2
         x: 0
@@ -425,14 +425,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 4cea8d5abfee42e60800000000000000
-      internalID: 7936731207920299716
+      spriteID: 073dc12fa9fc3bf80800000000000000
+      internalID: -8091895841060760720
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Viking_12
+      name: Viking_Torch_13
       rect:
         serializedVersion: 2
         x: 48
@@ -446,14 +446,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 93afcf70004d300e0800000000000000
-      internalID: -2304765487684453831
+      spriteID: 8f4dec5e1949faa50800000000000000
+      internalID: 6534604938684585208
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Viking_14
+      name: Viking_Torch_14
       rect:
         serializedVersion: 2
         x: 96
@@ -467,14 +467,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 1ee2115862f66a310800000000000000
-      internalID: 1415941344086535905
+      spriteID: 129d24ce236f22260800000000000000
+      internalID: 7071485063497701665
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Viking_15
+      name: Viking_Torch_15
       rect:
         serializedVersion: 2
         x: 144
@@ -488,14 +488,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: caf13595f9d45cc10800000000000000
-      internalID: 2073148550267740076
+      spriteID: 904696f12662699e0800000000000000
+      internalID: -1615061213490093047
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Viking_16
+      name: Viking_Torch_16
       rect:
         serializedVersion: 2
         x: 0
@@ -509,14 +509,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: e362dc1390f100ac0800000000000000
-      internalID: -3891075953697413570
+      spriteID: 592d1f9a6150c6260800000000000000
+      internalID: 7092049108100305557
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Viking_17
+      name: Viking_Torch_17
       rect:
         serializedVersion: 2
         x: 48
@@ -530,14 +530,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: ec29d671437f23190800000000000000
-      internalID: -7984047386271051058
+      spriteID: 7ec02c3e2002f8ab0800000000000000
+      internalID: -5003745464202162969
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Viking_18
+      name: Viking_Torch_18
       rect:
         serializedVersion: 2
         x: 96
@@ -551,14 +551,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 6a1229aed1bc97ff0800000000000000
-      internalID: -37775792506003034
+      spriteID: 4c9d291acdfebaca0800000000000000
+      internalID: -6004441947285825084
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Viking_19
+      name: Viking_Torch_19
       rect:
         serializedVersion: 2
         x: 144
@@ -572,14 +572,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 6e35fd7db232148d0800000000000000
-      internalID: -2863969216818621466
+      spriteID: db2988f9b06ec2830800000000000000
+      internalID: 4047863102694789821
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Viking_20
+      name: Viking_Torch_20
       rect:
         serializedVersion: 2
         x: 0
@@ -593,14 +593,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 906cffc7a9e900e80800000000000000
-      internalID: -8214391333964495351
+      spriteID: 09214e94d6c5c2180800000000000000
+      internalID: -9138827919380704624
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Viking_21
+      name: Viking_Torch_21
       rect:
         serializedVersion: 2
         x: 48
@@ -614,14 +614,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 2d2281230fbe3a090800000000000000
-      internalID: -8024310694178970926
+      spriteID: 5b7b362c790c8d710800000000000000
+      internalID: 1718335015875753909
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Viking_22
+      name: Viking_Torch_22
       rect:
         serializedVersion: 2
         x: 96
@@ -635,14 +635,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: de6620faa2da35dc0800000000000000
-      internalID: -3651384474030938387
+      spriteID: f56a0855a13348df0800000000000000
+      internalID: -178961896991316385
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Viking_23
+      name: Viking_Torch_23
       rect:
         serializedVersion: 2
         x: 144
@@ -656,8 +656,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 258cc8474056819d0800000000000000
-      internalID: -2803379698228475822
+      spriteID: e1206d489004dbe10800000000000000
+      internalID: 2214997001363653150
       vertices: []
       indices: 
       edges: []

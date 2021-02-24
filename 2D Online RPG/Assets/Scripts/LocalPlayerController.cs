@@ -4,17 +4,33 @@ using UnityEngine;
 
 public class LocalPlayerController : MonoBehaviour
 {
-   
-    
-    void Start()
-    {
-        
-        
-    }
+    // Transform playerTransform = null;
+    // GameObject playerObj;
 
-    void Update()
-    {
-       
-    }
+        
+    // void Start()
+    // {
+        
+        
+    // }
+
+    // void Update()
+    // {
+    //     if(playerTransform == null)
+    //     {
+    //         // Try to grab the reference
+    //         playerTransform = transform.Find("Networked Player (Local)");
+            
+    //         // If the player connects, and the reference is grabbed, set-up:
+    //         if(playerTransform != null)
+    //         {
+    //             playerObj = playerTransform.gameObject;
+    //         }
+    //     }
+
+        
+    // }
+
+
 
 }
