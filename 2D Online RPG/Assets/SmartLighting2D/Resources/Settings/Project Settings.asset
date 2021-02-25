@@ -1,0 +1,31 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1f131485c03f13c48a9a1c3520e76149, type: 3}
+  m_Name: Project Settings
+  m_EditorClassIdentifier: 
+  renderingMode: 1
+  editorView:
+    drawGizmos: 2
+    drawGizmosBounds: 1
+    sceneViewLayer: 0
+    gameViewLayer: 0
+    fowSceneViewLayer: 0
+    fowGameViewLayer: 0
+  chunks:
+    enabled: 0
+    chunkSize: 10
+  colorSpace: 0
+  managerInstance: 0
+  managerInternal: 0
+  MaxLightSize: 65
+  disable: 0
+  profile: {fileID: 11400000, guid: 744af7d72c977154f8a4489ba6ae519d, type: 2}
