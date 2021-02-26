@@ -6,6 +6,12 @@ using UnityEngine.UI;
 
 public class Player : NetworkBehaviour
 {
+    [Header("Components")]
+    public string account = "";
+    public string className = "";
+    public PlayerInventory inventory;
+
+    [Header("Entity")]
     public Entity entity;
 
     [Header("Player UI")]

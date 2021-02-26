@@ -2917,6 +2917,7 @@ GameObject:
   - component: {fileID: 1082278179}
   - component: {fileID: 1082278178}
   - component: {fileID: 1082278176}
+  - component: {fileID: 1082278180}
   m_Layer: 0
   m_Name: NetworkManager
   m_TagString: Untagged
@@ -3021,6 +3022,18 @@ MonoBehaviour:
   characterLimit: 4
   characterNameMaxLength: 16
   saveInterval: 60
+--- !u!114 &1082278180
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1082278175}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 20b3b4718bec48a4084ecb3f49f0414f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1084706080
 GameObject:
   m_ObjectHideFlags: 0
@@ -3291,7 +3304,7 @@ Tilemap:
       - {fileID: 6703503656626188089, guid: 5c11140ad3fb3d342a93d6670624116a, type: 3}
       - {fileID: -836580246522959223, guid: 5c11140ad3fb3d342a93d6670624116a, type: 3}
       - {fileID: -6237535784788995661, guid: 5c11140ad3fb3d342a93d6670624116a, type: 3}
-      m_AnimationSpeed: 1.5300834
+      m_AnimationSpeed: 1.8199
       m_AnimationTimeOffset: 0
       m_IsLooping: 1
   m_TileAssetArray:

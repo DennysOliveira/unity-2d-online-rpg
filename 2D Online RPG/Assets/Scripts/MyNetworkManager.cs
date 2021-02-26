@@ -1,16 +1,23 @@
-﻿using System.Collections;
+﻿//
+// Custom NetworkManager
+//
+using System;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
-
 using UnityEngine;
+using UnityEngine.Events;
 using Mirror;
-using System;
 #if UNITY_EDITOR
 using UnityEditor;
 #endif
 
+// Network States
 public enum NetworkState {Offline, Handshake, Lobby, World}
 
+// Unity Events
+
+[RequireComponent(typeof(Database))]
+[DisallowMultipleComponent]
 public class MyNetworkManager : NetworkManager
 {
     // current NwManager state on client
@@ -20,11 +27,11 @@ public class MyNetworkManager : NetworkManager
     // (for lobby -> Creating/Selecting characters)
     public Dictionary<NetworkConnection, string> lobby = new Dictionary<NetworkConnection, string>();
 
+    
+
     // UI
     [Header("UI")]
     public UIPopup uiPopup;
-
-
 
     AudioSource audioSource;
 
@@ -107,17 +114,22 @@ public class MyNetworkManager : NetworkManager
 
     public override void OnStartServer()
     {
-        base.OnStartServer();
-
-        // Connect to the DB
-
+        // Connect to the database
+        Database.singleton.Connect();
+        //Database.singleton.TestSaveChar("somchar", "someacc");
+        
         // Handshake packet handlers
+        NetworkServer.RegisterHandler<CharacterCreateMsg>(OnServerCharacterCreate);
+        NetworkServer.RegisterHandler<CharacterSelectMsg>(OnServerCharacterSelect);
+        NetworkServer.RegisterHandler<CharacterDeleteMsg>(OnServerCharacterDelete);
 
         // Invoke players saving
         // InvokeRepeating(nameof(SavePlayers), saveInterval, saveInterval);
 
         // Addon System Hooks
         // InvokeMany( , , "OnStartServer_");
+
+        base.OnStartServer();
     }
 
     public override void OnStopServer()

@@ -7,8 +7,13 @@ using Mirror;
 [Serializable]
 public class Entity
 {
+    [Header("Components")]
+    
+
+
     [Header("Name")]
     public string name;
+    public int level;
 
     [Header("Health")]
     [SyncVar] public int curHealth;
