@@ -1,8 +1,10 @@
 using MongoDB.Bson;
 using MongoDB.Driver;
 using MongoDB.Bson.Serialization.Attributes;
+using MongoDB.Bson.Serialization;
 using UnityEngine;     
 using System.Collections.Generic;
+using System.Collections;
 using System;
 
 public partial class Database : MonoBehaviour
@@ -10,12 +12,12 @@ public partial class Database : MonoBehaviour
     // Singleton
     public static Database singleton;
 
-    private string dbName  = "onlinerpg";    
+    private string dbName  = "onlinerpg1";    
     IMongoDatabase database;
 
     MongoClient connection;
     
-    class account {
+    public class account : BsonDocument {
         [BsonId]
         public string name { get; set; }
         public string password { get; set; }
@@ -24,7 +26,7 @@ public partial class Database : MonoBehaviour
         public bool banned { get; set; }
     }
 
-    class character {
+    public class character : BsonDocument {
         [BsonId] public string name { get; set; }
         public string account { get; set; }
         public string classname { get; set; }
@@ -43,6 +45,8 @@ public partial class Database : MonoBehaviour
         public bool deleted { get; set; }
     }
     
+    
+
 
     void Awake()
     {
@@ -57,8 +61,8 @@ public partial class Database : MonoBehaviour
         
 
         // create document Collections
-        database.CreateCollection("accounts");
-        database.CreateCollection("characters");
+        database.GetCollection<character>("characters");
+        database.GetCollection<account>("accounts");
 
         //accounts = database.GetCollection<BsonDocument>("accounts");
         //characters = database.GetCollection<BsonDocument>("characters");
@@ -77,17 +81,85 @@ public partial class Database : MonoBehaviour
         //database.Close();
     }
 
-    // TO-DO
-    public bool TryLogin(string account, string password){return true;}
+    public bool TryLogin(string account, string password)
+    {
+        if (!string.IsNullOrWhiteSpace(account) && !string.IsNullOrWhiteSpace(password))
+        {
+            var collection = database.GetCollection<account>("accounts");
+            var builder = Builders<account>.Filter;
 
-    // TO-DO
-    public bool CharacterExists(string characterName){return true;}
+            // Filter: Name = Account && Banned = False
+            var filter = (builder.Eq("name", account) & builder.Eq("banned", false));
+
+            // If the account doesn't exist, create it upon Login
+            Debug.Log(collection.Find(filter));
+            if(collection.Find(filter) == null)
+            {
+                Debug.Log("passing throuhg acc definition");
+                var acc = new account { { "name", account }, 
+                                            { "password", password },
+                                            { "created", DateTime.UtcNow },
+                                            { "lastlogin", DateTime.Now },
+                                            { "banned", false } };
+
+                collection.UpdateOne(filter, acc, new UpdateOptions{ IsUpsert = true });
+                Debug.Log(acc.name);
+            }
+
+            // check account name, password and banned status
+            var existsFilter = (builder.Eq("name", account) & builder.Eq("password", password) & builder.Eq("banned", false));
+            if(collection.Find(existsFilter) != null)
+            {
+                
+                // save last login date and return true
+                var updateFilter = builder.Eq("name", account);
+                var updateValue = Builders<account>.Update.Set("lastlogin", DateTime.UtcNow);
+                collection.UpdateOne(updateFilter, updateValue);
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public bool CharacterExists(string characterName)
+    {
+        var collection = database.GetCollection<character>("characters");
+
+        var filter = Builders<character>.Filter.Eq("name", characterName);
+
+        var result = collection.Find(filter);
+        Debug.Log(result);
+
+        if(result != null) return true;
+        else return false;
+
+    }
 
     // TO-DO
     public void CharacterDelete(string characterName){}
 
-    // TO-DO
-    //public List<string> CharactersForAccount(string account){}
+    public List<string> CharactersForAccount(string account)
+    {        
+        List<string> result = new List<string>();
+
+        // Select which collection to use
+        var collection = database.GetCollection<character>("characters");
+        
+        // Define our filterBuilder for character
+        var filterBuilder = Builders<character>.Filter;
+        
+        // Define our filters
+        var filter = filterBuilder.Eq("account", account) & filterBuilder.Eq("deleted", 0);
+  
+        // Walk through the cursor so we can read our data and pass it into our List<string>
+        var cursor = collection.Find(filter).ToCursor();
+        foreach ( var document in cursor.ToEnumerable())
+        {
+            result.Add(document.ToString());
+        }
+
+        return result;
+    }
     
     public void TestSaveChar(string charName, string accName)
     {
@@ -158,7 +230,8 @@ public partial class Database : MonoBehaviour
     {
         var collection = database.GetCollection<character>("characters");
         var filterBuilder = Builders<character>.Filter;
-        var filter = filterBuilder.Gt("name", characterName) & filterBuilder.Gt("deleted", 0);
+        var filter = filterBuilder.Eq("name", characterName) & filterBuilder.Eq("deleted", 0);
+        
         var document = collection.Find(filter).First();
 
         if( document != null )
@@ -235,10 +308,10 @@ public partial class Database : MonoBehaviour
     void SaveQuests(Player player){}
 
     //TO-DO   
-    // public void CharacterSave(Player player, bool online, bool useTransaction = true)
+    public void CharacterSave(Player player, bool online, bool useTransaction = true){}
 
     //TO-DO
-    // public void CharacterSaveMany(IEnumerable<Player> players, bool online = true)
+    public void CharacterSaveMany(IEnumerable<Player> players, bool online = true){}
 
     //TO-DO
     // public bool guidExists(string guild)

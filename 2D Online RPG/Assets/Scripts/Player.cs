@@ -6,6 +6,8 @@ using UnityEngine.UI;
 
 public class Player : NetworkBehaviour
 {
+    public bool isGameMaster;
+
     [Header("Components")]
     public string account = "";
     public string className = "";
@@ -20,11 +22,22 @@ public class Player : NetworkBehaviour
     public Slider staminaSlider;
     public Slider expSlider;
     
+    // cached players to save computation
+    // => on server: all online players
+    // => on client: all observed players
+    public static Dictionary<string, Player> onlinePlayers = new Dictionary<string, Player>();
 
     private GameObject playerHUD;
 
+    public double allowedLogoutTime;
+    public double remainingLogoutTime = 0f;
+
     void Start()
     {
+        if(!isServer && !isClient) return;
+
+        onlinePlayers[name] = this;
+
         playerHUD = GameObject.Find("Canvas").gameObject;
         
         if(isLocalPlayer)
