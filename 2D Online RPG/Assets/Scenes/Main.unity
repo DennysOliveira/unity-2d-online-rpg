@@ -6659,6 +6659,7 @@ MonoBehaviour:
   serverList:
   - name: Local
     ip: localhost
+  currentServer: 
   combatLogoutDelay: 5
   selection: -1
   selectionLocations:
@@ -6719,6 +6720,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 20b3b4718bec48a4084ecb3f49f0414f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  accountsDatabaseName: mmo-accounts
+  statisticsDatabaseName: mmo-serverstatistics
+  serverDatabaseName: mmo-nyzoren
+  onConnected:
+    m_PersistentCalls:
+      m_Calls: []
+  onCharacterLoad:
+    m_PersistentCalls:
+      m_Calls: []
+  onCharacterSave:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!114 &1082278181
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6740,6 +6753,7 @@ MonoBehaviour:
   manager: {fileID: 1082278179}
   loginAccount: 
   loginPassword: 
+  serverName: 
   passwordSalt: at_least_16_byte
   accountMinLength: 6
   accountMaxLength: 16
@@ -7211,7 +7225,7 @@ Tilemap:
       - {fileID: 6703503656626188089, guid: 5c11140ad3fb3d342a93d6670624116a, type: 3}
       - {fileID: -836580246522959223, guid: 5c11140ad3fb3d342a93d6670624116a, type: 3}
       - {fileID: -6237535784788995661, guid: 5c11140ad3fb3d342a93d6670624116a, type: 3}
-      m_AnimationSpeed: 1.0848194
+      m_AnimationSpeed: 1.1693144
       m_AnimationTimeOffset: 0
       m_IsLooping: 1
   m_TileAssetArray:

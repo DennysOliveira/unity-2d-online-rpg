@@ -47,8 +47,9 @@ public class MyNetworkManager : NetworkManager
     }
     public List<ServerInfo> serverList = new List<ServerInfo>()
     {
-        new ServerInfo{name="Local", ip="localhost"}
+        new ServerInfo{name="Nyzoren", ip="localhost"}
     };
+    public string currentServer = "";
 
     [Header("Logout")]
     [Tooltip("Delay after combat for players to be able to log out.")]
@@ -252,12 +253,15 @@ public class MyNetworkManager : NetworkManager
         // instatiate the prefab
         GameObject preview = Instantiate(prefab.gameObject, location.position, location.rotation);
         preview.transform.parent = location;
-        Player player= preview.GetComponent<Player>();
+        Player player = preview.GetComponent<Player>();
 
         // assign basic preview values like name and equipment
         player.name = character.name;
         player.isGameMaster = character.isGameMaster;
         
+        Collider2D collider = player.GetComponent<BoxCollider2D>();
+        collider.offset = new Vector2(collider.offset.x, 0.65f);
+        player.GetComponent<BoxCollider2D>().size = new Vector2(0.7f, 1.5f);
         // assign equipment
         // for( int i = 0; i < character.equipment.Length; ++i )
         // {
@@ -340,15 +344,19 @@ public class MyNetworkManager : NetworkManager
 
     void OnServerCharacterCreate(NetworkConnection conn, CharacterCreateMsg message)
     {
+        Debug.Log("Checking if user is logged in: [" + lobby[conn] + "]");
         if(lobby.ContainsKey(conn))
         {
+            Debug.Log("Checking if char name characters is allowed.");
             if (IsAllowedCharacterName(message.name))
             {
+                Debug.Log("Checking if name is taken.");
                 // check for availability
                 string account = lobby[conn];
                 if(!Database.singleton.CharacterExists(message.name))
                 {
                     // are there slots available to create a new char
+                    Debug.Log("Checking slots available.");
                     if(Database.singleton.CharactersForAccount(account).Count < characterLimit)
                     {
                         if (0 <= message.classIndex && message.classIndex < playerClasses.Count)
@@ -358,16 +366,18 @@ public class MyNetworkManager : NetworkManager
                             if(message.gameMaster == false || conn == NetworkServer.localConnection)
                             {
                                 // create new char based on prefabs
+                                Debug.Log("Calling CreateCharacter");
                                 Player player = CreateCharacter(playerClasses[message.classIndex].gameObject, message.name, account, message.gameMaster);
 
                                 // addon system hooks
-
                                 onServerCharacterCreate.Invoke(message, player);
 
+                                Debug.Log("Calling CharacterSave from Database");
                                 // save this player
                                 Database.singleton.CharacterSave(player, false);
                                 Destroy(player.gameObject);
 
+                                Debug.Log("Sending MakeCharactersAvailableMessage(" + account + ")");
                                 // send available chars to list again
                                 // causing the client to switch to charSelect scene again
                                 conn.Send(MakeCharactersAvailableMessage(account));

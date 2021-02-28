@@ -23,6 +23,7 @@ public partial class UICharacterCreation : MonoBehaviour
                 createButton.onClick.SetListener(() => {
                     CharacterCreateMsg message = new CharacterCreateMsg {
                         name = nameInput.text,
+                        server = manager.currentServer,
                         classIndex = 0,
                         gameMaster = false
                     };

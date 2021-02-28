@@ -15,6 +15,7 @@ public class NetworkAuthenticatorMMO : NetworkAuthenticator
     [Header("Login")]
     public string loginAccount = "";
     public string loginPassword = "";
+    public string serverName = "";
 
     [Header("Security")]
     public string passwordSalt = "at_least_16_byte";
@@ -41,7 +42,7 @@ public class NetworkAuthenticatorMMO : NetworkAuthenticator
         if(IsAllowedPassword(loginPassword)){
 
             string hash = Utils.PBKDF2Hash(loginPassword, passwordSalt + loginAccount);
-            LoginMsg message = new LoginMsg{account=loginAccount, password=hash, version=Application.version};
+            LoginMsg message = new LoginMsg{account=loginAccount, password=hash, server=serverName, version=Application.version};
             conn.Send(message);
             Debug.Log("Login message was sent");
             
@@ -112,6 +113,9 @@ public class NetworkAuthenticatorMMO : NetworkAuthenticator
 
                         // notify the client about the successful login
                         conn.Send(new LoginSuccessMsg());
+
+                        // update current server on manager cache
+                        manager.currentServer = message.server;
 
                         // authenticate on server
                         OnServerAuthenticated.Invoke(conn);

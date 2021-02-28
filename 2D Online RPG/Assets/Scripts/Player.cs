@@ -1,8 +1,12 @@
-﻿using System.Collections;
+﻿using System;
 using System.Collections.Generic;
 using UnityEngine;
 using Mirror;
 using UnityEngine.UI;
+using UnityEngine.Events;
+
+
+[Serializable] public class UnityEventPlayer : UnityEvent<Player> {}
 
 public class Player : NetworkBehaviour
 {
@@ -70,14 +74,14 @@ public class Player : NetworkBehaviour
     
     private void Update()
     {
-        healthSlider.value  = entity.curHealth;
-        manaSlider.value    = entity.curMana;
-        staminaSlider.value = entity.curStamina;
+        // healthSlider.value  = entity.curHealth;
+        // manaSlider.value    = entity.curMana;
+        // staminaSlider.value = entity.curStamina;
 
-        if(Input.GetKeyDown(KeyCode.Space))
-        {
-           CmdTakeDamage(10);
-        }
+        // if(Input.GetKeyDown(KeyCode.Space))
+        // {
+        //    CmdTakeDamage(10);
+        // }
     }
 
     [Command]

@@ -79,6 +79,8 @@ public class UILogin : MonoBehaviour
             // inputs
             auth.loginAccount = accountInput.text;
             auth.loginPassword = passwordInput.text;
+            auth.serverName = serverDropdown.name;
+            
 
             // copy servers to dropdown; copy selected one to networkmanager ip/port
             serverDropdown.interactable = !manager.isNetworkActive;

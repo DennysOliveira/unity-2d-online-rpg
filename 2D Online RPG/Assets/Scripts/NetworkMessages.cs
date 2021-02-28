@@ -7,6 +7,7 @@ public partial struct LoginMsg : NetworkMessage
 {
     public string account;
     public string password;
+    public string server;
     public string version;
 }
 
@@ -18,6 +19,7 @@ public partial struct LoginSuccessMsg : NetworkMessage
 public partial struct CharacterCreateMsg : NetworkMessage
 {
     public string name;
+    public string server;
     public int classIndex;
     public bool gameMaster;
 }
