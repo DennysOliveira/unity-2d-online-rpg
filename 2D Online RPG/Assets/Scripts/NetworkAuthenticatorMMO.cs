@@ -18,7 +18,10 @@ public class NetworkAuthenticatorMMO : NetworkAuthenticator
 
     [Header("Security")]
     public string passwordSalt = "at_least_16_byte";
+    public int accountMinLength = 6;
     public int accountMaxLength = 16;
+    public int passwordMinLength = 6;
+    //public int passwordMaxLength = 20;
 
     // CLIENT ~
     public override void OnStartClient()
@@ -34,14 +37,24 @@ public class NetworkAuthenticatorMMO : NetworkAuthenticator
         // it is recommended to use a different salt for each hash.
         // ideally, we would store each user salt in the db.
         // this model will use account name as salt
-        // 
-        string hash = Utils.PBKDF2Hash(loginPassword, passwordSalt + loginAccount);
-        LoginMsg message = new LoginMsg{account=loginAccount, password=hash, version=Application.version};
-        conn.Send(message);
-        Debug.Log("Login message was sent");
 
-        // set state    
-        manager.state = NetworkState.Handshake;
+        if(IsAllowedPassword(loginPassword)){
+
+            string hash = Utils.PBKDF2Hash(loginPassword, passwordSalt + loginAccount);
+            LoginMsg message = new LoginMsg{account=loginAccount, password=hash, version=Application.version};
+            conn.Send(message);
+            Debug.Log("Login message was sent");
+            
+            // set state    
+            manager.state = NetworkState.Handshake;
+        }
+        else
+        {
+            if(loginPassword.Length <= 6)
+                manager.ServerSendError(conn, "Password needs at least 6 characters.", true);
+        }
+         
+
     }
 
     void OnClientLoginSuccess(NetworkConnection conn, LoginSuccessMsg msg)
@@ -64,8 +77,14 @@ public class NetworkAuthenticatorMMO : NetworkAuthenticator
 
     public bool IsAllowedAccountName(string account)
     {
-        return account.Length <= accountMaxLength &&
+        return account.Length >= accountMinLength &&
+               account.Length <= accountMaxLength &&
                Regex.IsMatch(account, @"^[a-zA-Z0-9_]+$");
+    }
+
+    public bool IsAllowedPassword(string password)
+    {
+        return password.Length >= passwordMinLength;
     }
 
     bool AccountLoggedIn(string account)
@@ -116,7 +135,7 @@ public class NetworkAuthenticatorMMO : NetworkAuthenticator
             }
             else
             {
-                manager.ServerSendError(conn, "account name not allowed", true);
+                manager.ServerSendError(conn, "Account name should have at least 6 characters and no more than 20.", true);
             }
         }
         else

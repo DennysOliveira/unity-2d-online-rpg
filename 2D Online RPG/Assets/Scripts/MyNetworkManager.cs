@@ -162,6 +162,15 @@ public class MyNetworkManager : NetworkManager
     {
         // Connect to the database
         Database.singleton.Connect();
+
+        // Run database tests
+        Debug.Log("### DB Tests #####################");
+       
+        // Database.singleton.TestLogin("banana2");
+        //Debug.Log("2nd test: exists on db");
+        //Database.singleton.TestLogin("hasuas");
+
+        Debug.Log("### End DB Tests #####################");
                 
         // Handshake packet handlers
         NetworkServer.RegisterHandler<CharacterCreateMsg>(OnServerCharacterCreate);

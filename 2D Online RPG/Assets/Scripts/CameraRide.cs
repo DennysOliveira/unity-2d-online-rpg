@@ -34,20 +34,13 @@ public class CameraRide : MonoBehaviour
 
         if (currentDirection == "left")
         {
-            MoveToPoint(new Vector3(-10, 0, baseZ));
+            movement = new Vector3(-1, 0, 0);
+            transform.position += movement * speed * Time.deltaTime;
+            
         }
         if (currentDirection == "right") {
-            MoveToPoint(new Vector3(10, 0, baseZ));
+            movement = new Vector3(1, 0, 0);
+            transform.position += movement * speed * Time.deltaTime;
         }
-        
-        
-
-        //transform.position = Vector3.Lerp(curPos, movement * speed, lerpSmoothness * Time.deltaTime);
     }
-
-   void MoveToPoint(Vector3 target)
-   {
-       movement = new Vector3(target.x + 1, target.y, target.z);
-       transform.position += movement * speed * Time.deltaTime;
-   }
 }

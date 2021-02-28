@@ -1,7 +1,5 @@
 using MongoDB.Bson;
 using MongoDB.Driver;
-using MongoDB.Bson.Serialization.Attributes;
-using MongoDB.Bson.Serialization;
 using UnityEngine;     
 using System.Collections.Generic;
 using System.Collections;
@@ -12,13 +10,14 @@ public partial class Database : MonoBehaviour
     // Singleton
     public static Database singleton;
 
-    private string dbName  = "onlinerpg1";    
+    private string dbName  = "onlinerpg";    
     IMongoDatabase database;
-
     MongoClient connection;
+    IMongoCollection<character> characters;
+    IMongoCollection<account> accounts; 
     
-    public class account : BsonDocument {
-        [BsonId]
+    public class account {
+        public ObjectId id { get; set; }
         public string name { get; set; }
         public string password { get; set; }
         public DateTime created { get; set; }
@@ -26,8 +25,9 @@ public partial class Database : MonoBehaviour
         public bool banned { get; set; }
     }
 
-    public class character : BsonDocument {
-        [BsonId] public string name { get; set; }
+    public class character {
+        public ObjectId id { get; set; }
+        public string name { get; set; }
         public string account { get; set; }
         public string classname { get; set; }
         public int level { get; set; }
@@ -42,11 +42,10 @@ public partial class Database : MonoBehaviour
 
         public bool online { get; set; } 
         public DateTime lastSaved { get; set; }
-        public bool deleted { get; set; }
+        public bool deleted { get; set; } = false;
     }
     
     
-
 
     void Awake()
     {
@@ -60,13 +59,9 @@ public partial class Database : MonoBehaviour
         database = connection.GetDatabase(dbName);
         
 
-        // create document Collections
-        database.GetCollection<character>("characters");
-        database.GetCollection<account>("accounts");
-
-        //accounts = database.GetCollection<BsonDocument>("accounts");
-        //characters = database.GetCollection<BsonDocument>("characters");
-        
+        // create document Collections if they dont exist and store a reference to them
+        characters = database.GetCollection<character>("characters");
+        accounts = database.GetCollection<account>("accounts");
 
         // addon system hooks
         Utils.InvokeMany(typeof(Database), this, "Initialize_");
@@ -80,41 +75,65 @@ public partial class Database : MonoBehaviour
         Debug.Log("Database should disconnect.");
         //database.Close();
     }
+    
+    public void TestLogin(string account)
+    {
+        var builder = Builders<account>.Filter;
+        var filter = builder.Eq("name", account);
+        
+        
+        //var acc = new account { name = account, created = DateTime.UtcNow, lastlogin = DateTime.Now, banned = false };
+                
+        //_accounts.InsertOne(acc);
+
+        var result = accounts.Find(filter).ToList();
+        Debug.Log("TestLogin has found matching: [" + result.Count + "]");
+    }
 
     public bool TryLogin(string account, string password)
     {
         if (!string.IsNullOrWhiteSpace(account) && !string.IsNullOrWhiteSpace(password))
         {
-            var collection = database.GetCollection<account>("accounts");
-            var builder = Builders<account>.Filter;
+            
+            var filterBuilder = Builders<account>.Filter;
 
-            // Filter: Name = Account && Banned = False
-            var filter = (builder.Eq("name", account) & builder.Eq("banned", false));
+            // Filter: (Account Name & Not Banned)
+            var filter = (filterBuilder.Eq("name", account) & filterBuilder.Eq("banned", false));
 
             // If the account doesn't exist, create it upon Login
-            Debug.Log(collection.Find(filter));
-            if(collection.Find(filter) == null)
+            bool exists = (accounts.Find(filter).ToList().Count >= 1) ? true : false;
+            Debug.Log("[TryLogin]> Does the account exists? [" + exists + "].");
+            if(exists == false)
             {
-                Debug.Log("passing throuhg acc definition");
-                var acc = new account { { "name", account }, 
-                                            { "password", password },
-                                            { "created", DateTime.UtcNow },
-                                            { "lastlogin", DateTime.Now },
-                                            { "banned", false } };
-
-                collection.UpdateOne(filter, acc, new UpdateOptions{ IsUpsert = true });
-                Debug.Log(acc.name);
-            }
-
-            // check account name, password and banned status
-            var existsFilter = (builder.Eq("name", account) & builder.Eq("password", password) & builder.Eq("banned", false));
-            if(collection.Find(existsFilter) != null)
-            {
+                Debug.Log("[TryLogin]> ACCOUNT not found. Creating one.");
+                var newAccount = new account { name = account,
+                                        password = password,
+                                        created = DateTime.UtcNow,
+                                        lastlogin = DateTime.Now,
+                                        banned = false };
                 
-                // save last login date and return true
-                var updateFilter = builder.Eq("name", account);
+                accounts.InsertOne(newAccount);
+                
+                Debug.Log("[TryLogin]> InsertOne: account named " + newAccount.name + ".");
+                
+            }
+            if(exists == true) Debug.Log("[TryLogin]> Account found -> authenticating...");
+
+            // The query for existing accounts should also check if the password is correct.
+            // Filter: (Account Name & Password & Not Banned)
+            var existsFilter = (filterBuilder.Eq("name", account) & filterBuilder.Eq("password", password) & filterBuilder.Eq("banned", false));
+            bool shouldAuth = (accounts.Find(filter).ToList().Count >= 1) ? true : false;
+
+            if(!shouldAuth) Debug.Log("[TryLogin]> Information provided is incorrect. Should not authenticate.");
+            if(shouldAuth)
+            {
+                Debug.Log("[TryLogin]> Information provided is correct, authenticated.");
+                // If user information is correct and should be authenticated, we should
+                // uptade it's lastLogin information to now.
+                var updateFilter = filterBuilder.Eq("name", account);
                 var updateValue = Builders<account>.Update.Set("lastlogin", DateTime.UtcNow);
-                collection.UpdateOne(updateFilter, updateValue);
+                accounts.UpdateOne(updateFilter, updateValue);
+                Debug.Log("[TryLogin]> Last Login time updated.");
                 return true;
             }
         }
@@ -161,52 +180,6 @@ public partial class Database : MonoBehaviour
         return result;
     }
     
-    public void TestSaveChar(string charName, string accName)
-    {
-        var collection = database.GetCollection<character>("characters");
-
-        var document = new character {
-            name = charName,
-            account = accName,
-            classname = "none",
-            level = 1,
-            experience = 0,
-            health = 100,
-            mana = 100,
-            strength = 1,
-            intelligence = 1,
-            agility = 1,
-            online = false,
-            lastSaved = DateTime.Now,
-            deleted = false
-        };
-
-        
-        
-
-        // var character = new BsonDocument
-        // {
-        //     { "name", charName },
-        //     { "account", accName },
-        //     { "level", 1 },
-        //     { "experience", 0 },
-        //     { "stats", 
-        //         new BsonDocument {
-        //             { "strength", 1 },
-        //             { "intelligence", 1 },
-        //             { "health", 100 },
-        //             { "mana", 100 },
-        //         }
-        //     },
-        //     { "online", false },
-        //     { "lastSaved", DateTime.Now },
-        //     { "deleted", false }
-        // };
-
-       collection.InsertOne(document);
-       Debug.Log("Character " + charName + " was saved on the DB.");
-    }
-
     // TO-DO
     void LoadInventory(PlayerInventory inventory){}
 
