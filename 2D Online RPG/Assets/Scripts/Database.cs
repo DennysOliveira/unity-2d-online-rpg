@@ -195,6 +195,7 @@ public partial class Database : MonoBehaviour
         foreach ( var document in cursor.ToEnumerable())
         {
             result.Add(document.name);
+            Debug.Log("CharactersForAccount> Loading character: " + document.name);
         }
 
         return result;
@@ -233,11 +234,12 @@ public partial class Database : MonoBehaviour
             Player prefab = prefabs.Find(p => p.name == result[0].classname);
             if (prefab != null)
             {
-                Debug.Log("CharacterLoad> Loading db info into the character.");
+                Debug.Log("CharacterLoad> Loading db info into the character: "+ characterName);
                 GameObject go = Instantiate(prefab.gameObject);
                 Player player = go.GetComponent<Player>();
 
-                player.name                 = result[0].name;
+                player.name                 = characterName;
+                player.entity.name          = characterName;
                 player.account              = result[0].account;
                 player.className            = result[0].classname;
                 player.entity.level         = result[0].level;

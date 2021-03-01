@@ -4,13 +4,26 @@ using UnityEngine;
 using Mirror;
 using UnityEngine.UI;
 using UnityEngine.Events;
+using TMPro;
 
 
 [Serializable] public class UnityEventPlayer : UnityEvent<Player> {}
 
 public class Player : NetworkBehaviour
 {
-    public bool isGameMaster;
+    // localPlayer singleton for easier access from UI scripts, etc.
+    public static Player localPlayer;
+
+    [Header("Text Meshes")]
+    public TextMeshPro nameOverlay;
+    public Color nameOverlayDefaulColor = Color.white;
+    public Color nameOverlayOffenderColor = Color.yellow;
+    public Color nameOverlayMurdererColor = Color.red;
+    public Color nameOverlayPartyColor = new Color(0.34f, 1f, 0.7f);
+    public string nameOverlayGameMasterPrefix = "[GM] ";
+
+
+    [SyncVar] public bool isGameMaster;
 
     [Header("Components")]
     public string account = "";
@@ -19,13 +32,7 @@ public class Player : NetworkBehaviour
 
     [Header("Entity")]
     public Entity entity;
-
-    [Header("Player UI")]
-    public Slider healthSlider;
-    public Slider manaSlider;
-    public Slider staminaSlider;
-    public Slider expSlider;
-    
+        
     // cached players to save computation
     // => on server: all online players
     // => on client: all observed players
@@ -40,34 +47,8 @@ public class Player : NetworkBehaviour
     {
         if(!isServer && !isClient) return;
 
+        
         onlinePlayers[name] = this;
-
-        playerHUD = GameObject.Find("Canvas").gameObject;
-        
-        if(isLocalPlayer)
-        {
-            // Grab slider references // GameObject.FindWithTag("HealthSlider").GetComponent<Slider>();
-            healthSlider    = GameObject.Find("Canvas/PlayerUI/PlayerHUD/HealthSlider").GetComponent<Slider>();
-            manaSlider      = GameObject.Find("Canvas/PlayerUI/PlayerHUD/ManaSlider").GetComponent<Slider>();
-            staminaSlider   = GameObject.Find("Canvas/PlayerUI/PlayerHUD/StaminaSlider").GetComponent<Slider>();
-            expSlider       = GameObject.Find("Canvas/PlayerUI/PlayerHUD/ExperienceSlider").GetComponent<Slider>();
-
-            // Sets up entity values according to the Database
-            CmdSetEntityValues();
-
-            // Set slider values according to Entity values
-            healthSlider.value      = entity.curHealth;
-            healthSlider.maxValue   = entity.maxHealth;
-
-            manaSlider.value        = entity.curMana;
-            manaSlider.maxValue     = entity.maxMana;
-
-            staminaSlider.value     = entity.curStamina;
-            staminaSlider.maxValue  = entity.maxStamina;
-
-            expSlider.value = 0;
-        }
-        
 
     }
 
@@ -84,51 +65,34 @@ public class Player : NetworkBehaviour
         // }
     }
 
-    [Command]
-    void CmdSetEntityValues()
+    void LateUpdate()
     {
-        // TO-DO: Get values from the database
-        // int dbHealth  = GetValue("health", entity.name);
-        // int dbMana    = GetValue("mana", entity.name);
-        // int dbStamina = GetValue("stamina", entity.name);
+        // animate here
 
-        // Set HP/MP/SP values accordingly
-        entity.curHealth  = entity.maxHealth;
-        entity.curMana    = entity.maxMana;
-        entity.curStamina = entity.maxStamina;
+        // update overlays, in world and preview
+        if(!isServerOnly)
+        {
+            if(nameOverlay != null)
+            {
+                string prefix = isGameMaster ? nameOverlayGameMasterPrefix : "";
+                nameOverlay.text = prefix + name;
+
+                if(localPlayer != null)
+                {
+                    nameOverlay.color = nameOverlayDefaulColor;
+                }
+            }
+        }
     }
 
-    // Commands to get values from the database through the Server
-    // In the future, should get current value from the database when the player logs in.
-    [Command]
-    void CmdGetHealth()
+    void OnDestroy()
     {
-        entity.curHealth = entity.maxHealth;
-    }
+        if(onlinePlayers.TryGetValue(name, out Player entry) && entry == this)
+            onlinePlayers.Remove(name);
 
-    [Command]
-    void CmdGetMana()
-    {
-        entity.curHealth = entity.maxHealth;
-    }
+        if(!isServer && !isClient) return;
 
-    [Command]
-    void CmdGetStamina()
-    {
-        entity.curStamina = entity.maxStamina;
+        if(isLocalPlayer)
+            localPlayer = null;
     }
-
-    [Command]
-    void CmdGetExp()
-    {
-        Debug.Log("Getting EXP Values from the Database...");
-    }
-
-    [Command]
-    void CmdTakeDamage(int dmg)
-    {
-        entity.curHealth -= dmg;
-    }
-
-    
 }

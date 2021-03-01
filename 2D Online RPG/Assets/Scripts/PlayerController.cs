@@ -54,7 +54,7 @@ public class PlayerController : NetworkBehaviour
         if(isLocalPlayer)
         {
             // Set up this object into a non-networked object
-            this.name = "Networked Player (Local)";
+            // this.name = "Networked Player (Local)";
             this.transform.parent = localPlayerObject.transform;
 
             isWalking = false;
@@ -67,10 +67,10 @@ public class PlayerController : NetworkBehaviour
             playerCamera = GetComponent<Camera>();
             audioListener = GetComponent<AudioListener>();
 
-    } 
+        } 
         else
         {
-            this.name = "Networked Player (Clone)";
+            // this.name = "Networked Player (Clone)";
         }
     }
 

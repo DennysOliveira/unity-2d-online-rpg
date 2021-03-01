@@ -235,10 +235,14 @@ public class MyNetworkManager : NetworkManager
 
         foreach(var characterName in Database.singleton.CharactersForAccount(account))
         {
+            Debug.Log("MakeCharactersAvailableMsg> Before [CharacterLoad(charname)] -> characterName = " + characterName);
             GameObject player = Database.singleton.CharacterLoad(characterName, playerClasses, true);
             characters.Add(player.GetComponent<Player>());
+            Debug.Log("MakeCharactersAvailableMsg> After [CharacterLoad(charname)] -> player.name = " + player.GetComponent<Player>().name);
+            Debug.Log("MakeCharactersAvailableMsg> After [CharacterLoad(charname)] -> entity.name = " + player.GetComponent<Player>().entity.name);
         }
 
+        Debug.Log(characters[0].name);
         // construct the message
         CharactersAvailableMsg message = new CharactersAvailableMsg();
         message.Load(characters);
@@ -297,6 +301,7 @@ public class MyNetworkManager : NetworkManager
         for (int i = 0; i < charactersAvailableMsg.characters.Length; ++i)
         {
             CharactersAvailableMsg.CharacterPreview character = charactersAvailableMsg.characters[i];
+            Debug.Log("OnClientCharacterAvailable> Charname being iterated now:" + character.name);
 
             // find the prefab for that class
             Player prefab = playerClasses.Find(p => p.name == character.className);
