@@ -53,17 +53,9 @@ public class PlayerController : NetworkBehaviour
         
         if(isLocalPlayer)
         {
-            // Set up this object into a non-networked object
-            // this.name = "Networked Player (Local)";
-            this.transform.parent = localPlayerObject.transform;
-
             isWalking = false;
 
             // Setup camera
-            playerCamera = GetComponent<Camera>();
-            audioListener = GetComponent<AudioListener>();
-
-            // Setup Camera and Audio Listener
             playerCamera = GetComponent<Camera>();
             audioListener = GetComponent<AudioListener>();
 

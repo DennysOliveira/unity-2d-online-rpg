@@ -6,9 +6,11 @@ using UnityEngine.UI;
 
 public class UIPlayerHud : MonoBehaviour
 {
-    GameObject panel;
+    public GameObject panel;
     public Slider healthSlider;
+    public Text healthText;
     public Slider manaSlider;
+    public Text manaText;
     public Slider staminaSlider;
     public Slider experienceSlider;
 
@@ -24,16 +26,20 @@ public class UIPlayerHud : MonoBehaviour
         Player player = Player.localPlayer;
         if (player != null)
         {
+            panel.SetActive(true);
             healthSlider.value      = player.entity.curHealth;
             healthSlider.maxValue   = player.entity.maxHealth;
+            healthText.text = player.entity.curHealth + " / " + player.entity.maxHealth;
 
             manaSlider.value        = player.entity.curMana;
             manaSlider.maxValue     = player.entity.maxMana;
+            manaText.text = player.entity.curMana + " / " + player.entity.maxMana;
 
             staminaSlider.value     = player.entity.curStamina;
             staminaSlider.maxValue  = player.entity.maxStamina;
 
             experienceSlider.value = 0;
         }
+        else panel.SetActive(false);
     }
 }

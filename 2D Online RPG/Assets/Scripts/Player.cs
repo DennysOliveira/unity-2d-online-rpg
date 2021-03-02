@@ -52,6 +52,12 @@ public class Player : NetworkBehaviour
 
     }
 
+    public override void OnStartLocalPlayer()
+    {
+        // set singleton
+        localPlayer = this;
+    }
+
     
     private void Update()
     {

@@ -10,8 +10,10 @@ public class CameraRide : MonoBehaviour
     public string currentDirection;
 
     
+
     Vector3 curPos;
     Vector3 movement;
+
 
     void Start()
     {
@@ -20,10 +22,12 @@ public class CameraRide : MonoBehaviour
 
     void Update()
     {
+        
         // only while not in character selection or world
         //Debug.Log(((MyNetworkManager)NetworkManager.singleton).state);
         if (((MyNetworkManager)NetworkManager.singleton).state != NetworkState.Offline)
-            Destroy(this);
+            this.enabled = false;
+        else this.enabled = true;
 
 
         // Get immutable current position

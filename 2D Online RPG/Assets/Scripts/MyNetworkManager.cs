@@ -242,7 +242,7 @@ public class MyNetworkManager : NetworkManager
             Debug.Log("MakeCharactersAvailableMsg> After [CharacterLoad(charname)] -> entity.name = " + player.GetComponent<Player>().entity.name);
         }
 
-        Debug.Log(characters[0].name);
+        //Debug.Log(characters[0].name);
         // construct the message
         CharactersAvailableMsg message = new CharactersAvailableMsg();
         message.Load(characters);
