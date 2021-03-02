@@ -16,9 +16,9 @@ MonoBehaviour:
     list:
     - name: Main
       sortingLayer:
-        name: Default
+        name: Lighting
         Order: 64
-      darknessColor: {r: 0, g: 0, b: 0, a: 0}
+      darknessColor: {r: 0.8018868, g: 0.75820374, b: 0.63923997, a: 1}
       lightingResolution: 1
       dayLayers:
         list:
@@ -62,8 +62,8 @@ MonoBehaviour:
     coreAxis: 0
     projection: 0
   dayLightingSettings:
-    alpha: 0.625
-    direction: 247
+    alpha: 0
+    direction: 438
     height: 1
     softness:
       enable: 1

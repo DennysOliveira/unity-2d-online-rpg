@@ -1,0 +1,95 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b19cefa3bf552f94390d1c272b19ea6e, type: 3}
+  m_Name: SmartLighting2D Profile
+  m_EditorClassIdentifier: 
+  bufferPresets:
+    list:
+    - name: Default
+      sortingLayer:
+        name: Lighting
+        Order: 1
+      darknessColor: {r: 0.8018868, g: 0.75820374, b: 0.63923997, a: 1}
+      lightingResolution: 1
+      dayLayers:
+        list:
+        - layer: 0
+          type: 0
+          sorting: 0
+      nightLayers:
+        list:
+        - layer: 0
+          type: 0
+          sorting: 0
+  lightPresets:
+    list:
+    - name: Default
+      layerSetting:
+        list:
+        - layerID: 0
+          type: 0
+          sorting: 0
+          sortingIgnore: 0
+          shadowEffect: 0
+          shadowEffectLayer: 0
+          maskEffect: 0
+          maskEffectDistance: 1
+  eventPresets:
+    list:
+    - name: Disabled
+      layerSetting:
+        list:
+        - layerID: 0
+    - name: Light Event 1
+      layerSetting:
+        list:
+        - layerID: 1
+  qualitySettings:
+    HDR: 1
+    lightTextureSize: 1
+    lightEffectTextureSize: 1
+    lightFilterMode: 1
+    updateMethod: 0
+    coreAxis: 0
+    projection: 0
+  dayLightingSettings:
+    alpha: 1
+    direction: 360
+    height: 1
+    softness:
+      enable: 1
+      intensity: 0.5
+    bumpMap:
+      height: 1
+      strength: 1
+  fogOfWar:
+    filterMode: 1
+    useOnlyInPlay: 0
+    sorting: 0
+    resolution: 1
+    sortingLayer:
+      name: Default
+      Order: 0
+  layers:
+    lightLayers:
+      names:
+      - Default
+      - Light Layer 1
+    nightLayers:
+      names:
+      - Default
+      - Night Layer 1
+    dayLayers:
+      names:
+      - Default
+      - Day Layer 1
+  disable: 0

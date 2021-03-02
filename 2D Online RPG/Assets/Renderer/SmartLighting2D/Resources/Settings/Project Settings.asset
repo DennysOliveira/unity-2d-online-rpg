@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1f131485c03f13c48a9a1c3520e76149, type: 3}
   m_Name: Project Settings
   m_EditorClassIdentifier: 
-  renderingMode: 1
+  renderingMode: 2
   editorView:
     drawGizmos: 2
     drawGizmosBounds: 1
@@ -24,8 +24,8 @@ MonoBehaviour:
     enabled: 0
     chunkSize: 10
   colorSpace: 0
-  managerInstance: 0
+  managerInstance: 1
   managerInternal: 0
-  MaxLightSize: 65
+  MaxLightSize: 100
   disable: 0
-  profile: {fileID: 11400000, guid: 744af7d72c977154f8a4489ba6ae519d, type: 2}
+  profile: {fileID: 11400000, guid: d7136683faf41ec4d961b0fe19a360f2, type: 2}

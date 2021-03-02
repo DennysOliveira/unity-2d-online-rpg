@@ -46,3 +46,9 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: Map
+    uniqueID: 186058313
+    locked: 0
+  - name: Lighting
+    uniqueID: 1938614081
+    locked: 0
