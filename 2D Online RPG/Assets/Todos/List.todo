@@ -1,0 +1,19 @@
+
+- PlayerAttribute @done
+I want every entity to have attributes, but I will keep PlayerAttribute
+as unique for now.
+    - Strength @done
+    - Intelligence @done
+    - Agility @done
+    - Stamina @done
+    - Wisdom @done
+
+
+- Entity component needs to receive every Attribute
+ 
+
+- 
+
+>>> Maybe I should just add fixed attributes for a monster instead of 
+a whole component system for now. <<<
+

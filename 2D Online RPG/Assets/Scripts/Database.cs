@@ -239,13 +239,13 @@ public partial class Database : MonoBehaviour
                 Player player = go.GetComponent<Player>();
 
                 player.name                 = characterName;
-                player.entity.name          = characterName;
+                player.name                 = characterName;
                 player.account              = result[0].account;
                 player.className            = result[0].classname;
-                player.entity.level         = result[0].level;
-                player.entity.strength      = result[0].strength;
-                player.entity.agility       = result[0].agility;
-                player.entity.intelligence  = result[0].intelligence;
+                player.level.current        = result[0].level;
+                player.strength.value       = result[0].strength;
+                player.agility.value        = result[0].agility;
+                player.intelligence.value   = result[0].intelligence;
 
                 // if SAVED player position 'isValidToSpawn'
                 // { player spawns on saved position }
@@ -266,9 +266,9 @@ public partial class Database : MonoBehaviour
 
                 // Assign health/mana after max values were fully loaded
                 // (max values depend on equipment, stats, etc)
-                player.entity.curHealth     = result[0].health;
-                player.entity.curMana       = result[0].mana;
-                player.entity.curStamina    = result[0].stamina;
+                player.health.current     = result[0].health;
+                player.mana.current       = result[0].mana;
+                // player.entity.curStamina    = result[0].stamina; DEPRECATED
 
                 Debug.Log("CharacterLoad> If isnt preview");
                 if(!isPreview)
@@ -314,12 +314,12 @@ public partial class Database : MonoBehaviour
                                       x = player.transform.position.x,
                                       y = player.transform.position.y,
                                       z = player.transform.position.z,
-                                      level = player.entity.level,
-                                      health = player.entity.curHealth,
-                                      mana = player.entity.curMana,
-                                      stamina = player.entity.curStamina,
-                                      strength = player.entity.strength,
-                                      intelligence = player.entity.intelligence,
+                                      level = player.level.current,
+                                      health = player.health.current,
+                                      mana = player.mana.current,
+                                      //   stamina = player.entity.curStamina, DEPRECATED
+                                      strength = player.strength.value,
+                                      intelligence = player.intelligence.value,
                                       //experience = player.experience.current,
                                       online = online,
                                       lastSaved = DateTime.UtcNow,

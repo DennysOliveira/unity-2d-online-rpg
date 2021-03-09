@@ -9,8 +9,35 @@ using TMPro;
 
 [Serializable] public class UnityEventPlayer : UnityEvent<Player> {}
 
-public class Player : NetworkBehaviour
+//[RequireComponent(typeof(Experience))] // TO-DO
+[RequireComponent(typeof(Strength))]
+[RequireComponent(typeof(Agility))]
+[RequireComponent(typeof(Intelligence))]
+[RequireComponent(typeof(Spirit))]
+[RequireComponent(typeof(PlayerIndicator))]
+[RequireComponent(typeof(PlayerInventory))]     // TO-DO
+// [RequireComponent(typeof(PlayerLooting))]       // TO-DO
+// [RequireComponent(typeof(PlayerNpcRevive))]     // TO-DO
+// [RequireComponent(typeof(PlayerNpcTeleport))]   // TO-DO
+// [RequireComponent(typeof(PlayerNpcTrading))]    // TO-DO
+// [RequireComponent(typeof(PlayerParty))]         // TO-DO
+// [RequireComponent(typeof(PlayerPetControl))]    // TO-DO
+// [RequireComponent(typeof(PlayerQuests))]        // TO-DO
+// [RequireComponent(typeof(PlayerSkillbar))]      // TO-DO
+// [RequireComponent(typeof(PlayerSkills))]        // TO-DO
+// [RequireComponent(typeof(PlayerTrading))]       // TO-DO
+// [RequireComponent(typeof(NetworkName))]         // TO-DO
+
+public class Player : Entity
 {
+    [Header("Components")]
+    public Strength strength;
+    public Intelligence intelligence;
+    public Spirit spirit;
+    public Agility agility;
+    public PlayerIndicator indicator;
+
+
     // localPlayer singleton for easier access from UI scripts, etc.
     public static Player localPlayer;
 
@@ -29,10 +56,7 @@ public class Player : NetworkBehaviour
     public string account = "";
     public string className = "";
     public PlayerInventory inventory;
-
-    [Header("Entity")]
-    public Entity entity;
-        
+     
     // cached players to save computation
     // => on server: all online players
     // => on client: all observed players
