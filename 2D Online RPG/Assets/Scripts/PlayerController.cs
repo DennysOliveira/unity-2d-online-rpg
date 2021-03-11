@@ -28,13 +28,7 @@ public class PlayerController : NetworkBehaviour
     // Local Player Vars
     Camera playerCamera;
     AudioListener audioListener;
-
-    // Sprite-related Variables
-    [SyncVar] private bool torchEnabled = false;
-
-    [Header("Local Player Object")]
-    public GameObject localPlayerObject;
-
+    
     [Header("Player Animator Controllers")]
     public RuntimeAnimatorController cntVikingBase;
     public RuntimeAnimatorController cntVikingTorch;
@@ -48,9 +42,7 @@ public class PlayerController : NetworkBehaviour
         rb2d = GetComponent<Rigidbody2D>();
         player = GetComponent<Player>();
         
-
-        localPlayerObject = GameObject.Find("Local Player Object");
-        
+               
         if(isLocalPlayer)
         {
             isWalking = false;
@@ -96,12 +88,6 @@ public class PlayerController : NetworkBehaviour
 
             // Set isWalking if or if not walking - needs Client Authority.
             playerAnimator.SetBool("isWalking", isWalking);
-           
-            if(Input.GetKeyDown(KeyCode.T))
-            {
-                CmdToggleTorch();
-            }
-            
         }
     }
 
@@ -116,28 +102,7 @@ public class PlayerController : NetworkBehaviour
     void CmdMove(float input_x, float input_y)
     {
         // Calls the movement on the server with data calculated at server side.
-        rb2d.MovePosition(rb2d.position + movement * player.entity.speed * Time.fixedDeltaTime);
+        rb2d.MovePosition(rb2d.position + movement * player.speed * Time.fixedDeltaTime);
         
     }
-
-    [Command]
-    void CmdToggleTorch()
-    {
-        if(torchEnabled)
-        {
-            // disable torch
-            playerAnimator.runtimeAnimatorController = cntVikingBase;
-
-            torchEnabled = false;
-
-        } else
-        {
-            // enable torch
-            playerAnimator.runtimeAnimatorController = cntVikingTorch;
-                        
-            torchEnabled = true;
-        }
-        
-    }
-    
 }

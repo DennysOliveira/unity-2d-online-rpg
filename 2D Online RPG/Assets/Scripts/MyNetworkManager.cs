@@ -53,7 +53,7 @@ public class MyNetworkManager : NetworkManager
 
     [Header("Logout")]
     [Tooltip("Delay after combat for players to be able to log out.")]
-    public float combatLogoutDelay = 5;
+    public float combatLogoutDelay = 15;
 
     [Header("Character Selection")]
     public int selection = -1;
@@ -239,7 +239,6 @@ public class MyNetworkManager : NetworkManager
             GameObject player = Database.singleton.CharacterLoad(characterName, playerClasses, true);
             characters.Add(player.GetComponent<Player>());
             Debug.Log("MakeCharactersAvailableMsg> After [CharacterLoad(charname)] -> player.name = " + player.GetComponent<Player>().name);
-            Debug.Log("MakeCharactersAvailableMsg> After [CharacterLoad(charname)] -> entity.name = " + player.GetComponent<Player>().entity.name);
         }
 
         //Debug.Log(characters[0].name);
@@ -340,8 +339,8 @@ public class MyNetworkManager : NetworkManager
         
         // get equipment
 
-        player.entity.curHealth = player.entity.maxHealth;
-        player.entity.curMana = player.entity.maxMana;
+        player.health.current = player.health.max;
+        player.mana.current = player.mana.max;
         player.isGameMaster = gameMaster;
 
         return player;

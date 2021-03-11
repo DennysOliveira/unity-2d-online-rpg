@@ -27,16 +27,16 @@ public class UIPlayerHud : MonoBehaviour
         if (player != null)
         {
             panel.SetActive(true);
-            healthSlider.value      = player.entity.curHealth;
-            healthSlider.maxValue   = player.entity.maxHealth;
-            healthText.text = player.entity.curHealth + " / " + player.entity.maxHealth;
+            healthSlider.value      = player.health.current;
+            healthSlider.maxValue   = player.health.max;
+            healthText.text = player.health.current + " / " + player.health.max;
 
-            manaSlider.value        = player.entity.curMana;
-            manaSlider.maxValue     = player.entity.maxMana;
-            manaText.text = player.entity.curMana + " / " + player.entity.maxMana;
+            manaSlider.value        = player.mana.current;
+            manaSlider.maxValue     = player.mana.max;
+            manaText.text = player.mana.current + " / " + player.mana.max;
 
-            staminaSlider.value     = player.entity.curStamina;
-            staminaSlider.maxValue  = player.entity.maxStamina;
+            staminaSlider.value     = 0;
+            staminaSlider.maxValue  = 100;
 
             experienceSlider.value = 0;
         }

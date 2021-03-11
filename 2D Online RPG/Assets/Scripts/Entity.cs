@@ -27,6 +27,7 @@ public abstract partial class Entity : NetworkBehaviour
     public Mana mana;
     public Animator animator;
     public AudioSource audioSource;
+    public NetworkProximityGridChecker proxchecker;
 
     // finite state machine
     // -> state is only writable by entity class to avoid confusion
@@ -61,8 +62,8 @@ public abstract partial class Entity : NetworkBehaviour
 
     [Header("Events")]
     public UnityEventEntity onAggro;
-    public UnityEvent onLeftClick;  // called when left-clicking an unity
-    public UnityEvent onRightClick; // called when right-clicking an unity
+    public UnityEvent onSelect;  // called when left-clicking an unity
+    
 
 
     // safe zone flag
@@ -78,7 +79,7 @@ public abstract partial class Entity : NetworkBehaviour
     }
 
 
-    public virtual void Start()
+    protected virtual void Start()
     {
         // disable animator on the server (Significative Performance Boost)
         if (!isClient) animator.enabled = false;
@@ -161,7 +162,7 @@ public abstract partial class Entity : NetworkBehaviour
     
     // Aggro ->
     // This function is called when pulling aggro
-    public virtual void OnAgrro(Entity entity)
+    public virtual void OnAggro(Entity entity)
     {
         onAggro.Invoke(entity);
     }
