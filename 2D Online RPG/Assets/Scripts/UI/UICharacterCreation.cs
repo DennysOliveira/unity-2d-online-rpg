@@ -8,6 +8,7 @@ public partial class UICharacterCreation : MonoBehaviour
     public MyNetworkManager manager; // singleton is null until update
     public GameObject panel;
     public InputField nameInput;
+    public Dropdown raceDropdown;
     public Button createButton;
     public Button cancelButton;
 
@@ -19,12 +20,17 @@ public partial class UICharacterCreation : MonoBehaviour
             {
                 Show();
 
+                // Copy available player races to Race Dropdown
+                raceDropdown.options = manager.playerRaces.Select(
+                    p => new Dropdown.OptionData(p.name)
+                ).ToList();
+
                 createButton.interactable = manager.IsAllowedCharacterName(nameInput.text);
                 createButton.onClick.SetListener(() => {
                     CharacterCreateMsg message = new CharacterCreateMsg {
                         name = nameInput.text,
                         server = manager.currentServer,
-                        classIndex = 0,
+                        classIndex = raceDropdown.value,
                         gameMaster = false
                     };
                     NetworkClient.Send(message);

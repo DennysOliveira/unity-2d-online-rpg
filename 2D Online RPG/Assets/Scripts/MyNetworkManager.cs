@@ -59,7 +59,7 @@ public class MyNetworkManager : NetworkManager
     public int selection = -1;
     public Transform[] selectionLocations;
     public Transform selectionCameraLocation;
-    [HideInInspector] public List<Player> playerClasses = new List<Player>();
+    [HideInInspector] public List<Player> playerRaces = new List<Player>();
 
     [Header("Database")]
     public int characterLimit = 4;
@@ -91,7 +91,7 @@ public class MyNetworkManager : NetworkManager
     }
 
     // player classes
-    public List<Player> FindPlayerClasses()
+    public List<Player> FindPlayerRaces()
     {
         List<Player> classes = new List<Player>();
         foreach(GameObject prefab in spawnPrefabs)
@@ -109,7 +109,7 @@ public class MyNetworkManager : NetworkManager
 
         // cache the list of player classes
         // this should not be changed at runtime
-        playerClasses = FindPlayerClasses();
+        playerRaces = FindPlayerRaces();
     }
 
     public override void Start()
@@ -236,7 +236,7 @@ public class MyNetworkManager : NetworkManager
         foreach(var characterName in Database.singleton.CharactersForAccount(account))
         {
             Debug.Log("MakeCharactersAvailableMsg> Before [CharacterLoad(charname)] -> characterName = " + characterName);
-            GameObject player = Database.singleton.CharacterLoad(characterName, playerClasses, true);
+            GameObject player = Database.singleton.CharacterLoad(characterName, playerRaces, true);
             characters.Add(player.GetComponent<Player>());
             Debug.Log("MakeCharactersAvailableMsg> After [CharacterLoad(charname)] -> player.name = " + player.GetComponent<Player>().name);
         }
@@ -303,7 +303,7 @@ public class MyNetworkManager : NetworkManager
             Debug.Log("OnClientCharacterAvailable> Charname being iterated now:" + character.name);
 
             // find the prefab for that class
-            Player prefab = playerClasses.Find(p => p.name == character.className);
+            Player prefab = playerRaces.Find(p => p.name == character.className);
             if (prefab != null)
                 LoadPreview(prefab.gameObject, selectionLocations[i], i, character);
             else
@@ -363,7 +363,7 @@ public class MyNetworkManager : NetworkManager
                     Debug.Log("Checking slots available.");
                     if(Database.singleton.CharactersForAccount(account).Count < characterLimit)
                     {
-                        if (0 <= message.classIndex && message.classIndex < playerClasses.Count)
+                        if (0 <= message.classIndex && message.classIndex < playerRaces.Count)
                         {
                             // GM can only be requested by the host.
                             // DO NOT allow regular conns to create GMs.
@@ -371,7 +371,7 @@ public class MyNetworkManager : NetworkManager
                             {
                                 // create new char based on prefabs
                                 Debug.Log("Calling CreateCharacter");
-                                Player player = CreateCharacter(playerClasses[message.classIndex].gameObject, message.name, account, message.gameMaster);
+                                Player player = CreateCharacter(playerRaces[message.classIndex].gameObject, message.name, account, message.gameMaster);
 
                                 // addon system hooks
                                 onServerCharacterCreate.Invoke(message, player);
@@ -436,7 +436,7 @@ public class MyNetworkManager : NetworkManager
                 Debug.Log(account + " selected player " + characters[message.index]);
 
                 // load character data
-                GameObject go = Database.singleton.CharacterLoad(characters[message.index], playerClasses, false);
+                GameObject go = Database.singleton.CharacterLoad(characters[message.index], playerRaces, false);
 
                 // add to client
                 NetworkServer.AddPlayerForConnection(conn, go);
