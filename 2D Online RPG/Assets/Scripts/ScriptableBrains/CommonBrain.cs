@@ -9,9 +9,10 @@ public abstract class CommonBrain : ScriptableBrain
     public bool EventDied(Entity entity) =>
         entity.health.current == 0;
 
-    // Moving start event
 
-    // Moving end event
+
+    public bool EventMoveEnd(Entity entity) => entity.state != "MOVING";
+    public bool EventMoveStart(Entity entity) => entity.state == "MOVING";
 
     // Skill Request event
 

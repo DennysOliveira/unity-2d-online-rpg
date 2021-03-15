@@ -265,11 +265,20 @@ GameObject:
   - component: {fileID: -521154488006609632}
   - component: {fileID: 947801071808235856}
   - component: {fileID: -3880057410631043427}
+  - component: {fileID: -566720081251455221}
+  - component: {fileID: -322278643413679489}
+  - component: {fileID: 3692893651071643265}
+  - component: {fileID: 5636771415442487812}
+  - component: {fileID: 2539253879685986451}
+  - component: {fileID: 5212347745498491153}
+  - component: {fileID: 2680089260085109169}
+  - component: {fileID: -4533178591476805927}
+  - component: {fileID: 4034712631995958296}
   - component: {fileID: -2379786229039850567}
   - component: {fileID: 7343234045856317729}
   - component: {fileID: -2722992389245329003}
   m_Layer: 0
-  m_Name: Player
+  m_Name: Nord
   m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -495,10 +504,184 @@ MonoBehaviour:
   syncMode: 0
   syncInterval: 0.1
   player: {fileID: 0}
-  localPlayerObject: {fileID: 0}
   cntVikingBase: {fileID: 9100000, guid: 0f55e84cda4fc744ab72ab725fc0ee09, type: 2}
   cntVikingTorch: {fileID: 9100000, guid: e3a7d507345a7624c84c0e156b1514e4, type: 2}
   playerAnimator: {fileID: -521154488006609632}
+--- !u!114 &-566720081251455221
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4882459436559741192}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b8f4f8a65fbc62e47864cf4481453d79, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  syncMode: 0
+  syncInterval: 0.1
+  level: {fileID: -322278643413679489}
+  _current: 0
+  _max:
+    multiplier: 100
+    baseValue: 1.1
+  deathLossPercent: 0.05
+  onLevelUp:
+    m_PersistentCalls:
+      m_Calls: []
+  deathMsg: You died and lost experience.
+--- !u!114 &-322278643413679489
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4882459436559741192}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3dc1f2e39e334b84292ae4617a2558df, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  syncMode: 0
+  syncInterval: 0.1
+  current: 1
+  max: 999
+--- !u!114 &3692893651071643265
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4882459436559741192}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 31c1e391026d53843b3ddc903091eb98, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  syncMode: 0
+  syncInterval: 0.1
+  health: {fileID: 5636771415442487812}
+  spawnFull: 1
+  onEmpty:
+    m_PersistentCalls:
+      m_Calls: []
+  level: {fileID: -322278643413679489}
+  baseMana:
+    baseValue: 10
+    bonusPerLevel: 0
+  baseRecoveryRate: 1
+--- !u!114 &5636771415442487812
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4882459436559741192}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 47a0bfbbef2443e4286b6b5e3a73b6f5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  syncMode: 0
+  syncInterval: 0.1
+  health: {fileID: 5636771415442487812}
+  spawnFull: 1
+  onEmpty:
+    m_PersistentCalls:
+      m_Calls: []
+  level: {fileID: -322278643413679489}
+  baseHealth:
+    baseValue: 100
+    bonusPerLevel: 0
+  baseRecoveryRate: 1
+--- !u!114 &2539253879685986451
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4882459436559741192}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dfc49d3326a101747af1fbca77abe437, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  syncMode: 0
+  syncInterval: 0.1
+  level: {fileID: -322278643413679489}
+  health: {fileID: 5636771415442487812}
+  value: 0
+  manaBonusPerPoint: 10
+--- !u!114 &5212347745498491153
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4882459436559741192}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7e0d954da6198c34e9dcff18d7dc4b8e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  syncMode: 0
+  syncInterval: 0.1
+  level: {fileID: -322278643413679489}
+  health: {fileID: 5636771415442487812}
+  value: 0
+--- !u!114 &2680089260085109169
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4882459436559741192}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0f8105b17a45a6443868fcd6650aacae, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  syncMode: 0
+  syncInterval: 0.1
+  level: {fileID: -322278643413679489}
+  health: {fileID: 5636771415442487812}
+  value: 0
+--- !u!114 &-4533178591476805927
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4882459436559741192}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b1ff542d0aa37d540b9e069dd9e69634, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  syncMode: 0
+  syncInterval: 0.1
+  level: {fileID: -322278643413679489}
+  health: {fileID: 5636771415442487812}
+  value: 0
+  healthBonusPercentPerPoint: 5
+--- !u!114 &4034712631995958296
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4882459436559741192}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e54391b82563bf14cb699bb92e105c8d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  syncMode: 0
+  syncInterval: 0.1
+  visUpdateInterval: 1
+  forceHidden: 0
+  checkMethod: 1
 --- !u!114 &-2379786229039850567
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -513,36 +696,45 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   syncMode: 0
   syncInterval: 0.1
-  nameOverlay: {fileID: 825838404419953082}
-  nameOverlayDefaulColor: {r: 1, g: 1, b: 1, a: 1}
-  nameOverlayPartyColor: {r: 0.34, g: 1, b: 0.7, a: 1}
-  nameOverlayGameMasterPrefix: '[GM] '
-  isGameMaster: 0
+  level: {fileID: -322278643413679489}
+  health: {fileID: 5636771415442487812}
+  mana: {fileID: 3692893651071643265}
+  animator: {fileID: -521154488006609632}
+  audioSource: {fileID: 0}
+  proxchecker: {fileID: 4034712631995958296}
+  brain: {fileID: 11400000, guid: 2abe4263841069841bcc8cc0bda62d2f, type: 2}
+  _state: IDLE
+  lastCombatTime: 0
+  target: {fileID: 0}
+  _speed:
+    baseValue: 2
+    bonusPerLevel: 0
+  onAggro:
+    m_PersistentCalls:
+      m_Calls: []
+  onSelect:
+    m_PersistentCalls:
+      m_Calls: []
+  inSafeZone: 0
+  strength: {fileID: -4533178591476805927}
+  intelligence: {fileID: 2539253879685986451}
+  spirit: {fileID: 5212347745498491153}
+  agility: {fileID: 2680089260085109169}
+  indicator: {fileID: -2722992389245329003}
+  inventory: {fileID: 0}
   account: 
   className: 
-  inventory: {fileID: 0}
-  entity:
-    name: Player
-    level: 0
-    curHealth: 100
-    maxHealth: 100
-    curMana: 100
-    maxMana: 100
-    curStamina: 100
-    maxStamina: 100
-    strength: 2
-    intelligence: 2
-    agility: 2
-    wisdom: 2
-    damage: 1
-    armour: 1
-    speed: 2
-  healthSlider: {fileID: 0}
-  manaSlider: {fileID: 0}
-  staminaSlider: {fileID: 0}
-  expSlider: {fileID: 0}
-  allowedLogoutTime: 0
-  remainingLogoutTime: 0
+  isGameMaster: 0
+  nameOverlay: {fileID: 825838404419953082}
+  nameOverlayDefaulColor: {r: 1, g: 1, b: 1, a: 1}
+  nameOverlayOffenderColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
+  nameOverlayMurdererColor: {r: 1, g: 0, b: 0, a: 1}
+  nameOverlayPartyColor: {r: 0.34, g: 1, b: 0.7, a: 1}
+  nameOverlayGameMasterPrefix: '[GM] '
+  interactionRange: 4
+  localPlayerClickThrough: 1
+  cancelActionKey: 27
+  nextRiskyActionTime: 0
 --- !u!114 &7343234045856317729
 MonoBehaviour:
   m_ObjectHideFlags: 0

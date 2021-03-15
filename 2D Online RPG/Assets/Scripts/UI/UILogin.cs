@@ -91,4 +91,8 @@ public class UILogin : MonoBehaviour
         }
         else panel.SetActive(false);
     }
+
+    void FixedUpdate() {
+        
+    }
 }

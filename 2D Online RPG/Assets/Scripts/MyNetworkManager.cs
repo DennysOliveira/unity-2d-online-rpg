@@ -327,12 +327,12 @@ public class MyNetworkManager : NetworkManager
         
     }
 
-    Player CreateCharacter(GameObject classPrefab, string characterName, string account, bool gameMaster)
+    Player CreateCharacter(GameObject racePrefab, string characterName, string account, bool gameMaster)
     {
-        Player player = Instantiate(classPrefab).GetComponent<Player>();
+        Player player = Instantiate(racePrefab).GetComponent<Player>();
         player.name = characterName;
         player.account = account;
-        player.className = classPrefab.name;
+        player.className = racePrefab.name;
         player.transform.position = new Vector3(0, 0, 0);
 
         // get inventory

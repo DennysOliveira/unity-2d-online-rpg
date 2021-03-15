@@ -15,8 +15,8 @@ using TMPro;
 [RequireComponent(typeof(Intelligence))]
 [RequireComponent(typeof(Spirit))]
 [RequireComponent(typeof(PlayerIndicator))]
+[RequireComponent(typeof(Experience))]
 // [RequireComponent(typeof(PlayerInventory))]     // TO-DO
-//[RequireComponent(typeof(Experience))] // TO-DO
 // [RequireComponent(typeof(PlayerLooting))]       // TO-DO
 // [RequireComponent(typeof(PlayerNpcRevive))]     // TO-DO
 // [RequireComponent(typeof(PlayerNpcTeleport))]   // TO-DO
