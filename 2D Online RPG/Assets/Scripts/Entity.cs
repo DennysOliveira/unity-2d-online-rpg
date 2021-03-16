@@ -28,6 +28,7 @@ public abstract partial class Entity : NetworkBehaviour
     public Animator animator;
     public AudioSource audioSource;
     public NetworkProximityGridChecker proxchecker;
+    public new Collider collider;
 
     // finite state machine
     // -> state is only writable by entity class to avoid confusion
