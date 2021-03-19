@@ -26,6 +26,7 @@ public abstract partial class Entity : NetworkBehaviour
     public Health health;
     public Mana mana;
     public Animator animator;
+    public Movement movement;
     public AudioSource audioSource;
     public NetworkProximityGridChecker proxchecker;
     public new Collider collider;
