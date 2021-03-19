@@ -23,9 +23,10 @@ public abstract class Movement : NetworkBehaviour
 
     public abstract bool CanNavigate();
 
+    // navigate along a path to a destination
     public abstract void Navigate(Vector3 destination, float stoppingDistance);
 
-    
+
     public abstract bool IsValidSpawnPoint(Vector3 position);
 
     // Check if the next destination is valid
