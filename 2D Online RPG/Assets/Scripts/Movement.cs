@@ -12,8 +12,7 @@ public abstract class Movement : NetworkBehaviour
     // .speed lives in Entity and depends on level, skills, equip, etc.
     public abstract void SetSpeed(float speed);
 
-    // look at a transform while only rotating on the Y axis
-    public abstract void LookAtY(Vector3 position);
+    public abstract void LookAt2D(Vector2 position);
 
     // Reset all movement. Stop and stand.
     public abstract void Reset();
