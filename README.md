@@ -1,3 +1,9 @@
+## Online Multiplayer RPG with an Authoritative Server
+### Description
+I'm aiming to create a game very much like what we have as MMORPGs though not as scalable as current MMORPGS as doing this requires a lot of time and expertise.
+My main goal is to earn experience on data manipulation at server-sided resources and learn some Unity on the way.
+
+
 ### Roadmap
 What do I need to do and what is done.
 
@@ -31,16 +37,17 @@ What do I need to do and what is done.
 - [ ] Inventory
 
 #### Monsters
- - [ ] Base Entity
-   - [ ] Energies // Percent and Recover methods
-     - [ ] Health Component
-     - [ ] Mana Component
-     - [ ] Stamina Component
-   - [ ] Level Component
+ - [x] Base Entity
+   - [x] Energies // Percent and Recover methods
+     - [x] Health Component
+     - [x] Mana Component
+     - [x] Stamina Component
+     - [-] Statuses Components      
+   - [x] Level Component
    - [ ] Equipment Component
    - [ ] Skills Component
    - [ ] Animator Component (currently, animator is on the Player Component)
-   - [ ] 2D Grid Proximity Checker Component 
+   - [x] 2D Grid Proximity Checker Component 
    - [ ] Audio Source
 
 #### Quests
@@ -57,8 +64,8 @@ What do I need to do and what is done.
 #### UI
 - ##### Local Player UI
   - [x] Login
-  - [ ] Account Creation (will be done on a Next.js)
-  - [ ] Character Creation
+  - [x] Account Creation (will be done on a Next.js web-app hosted on Heroku afterwards) - for now, it is possible to create a new account by trying to login with an unexistant one.
+  - [x] Character Creation
     - [x] Gender Selection
   - [x] Character Selection
   - [ ] Inventory (V)
