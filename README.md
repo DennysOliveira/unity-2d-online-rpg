@@ -3,6 +3,8 @@
 I'm aiming to create a game very much like what we have as MMORPGs though not as scalable as current MMORPGS as doing this requires a lot of time and expertise.
 My main goal is to earn experience on data manipulation at server-sided resources and learn some Unity on the way.
 
+### Project Status
+This project is currently paused without any ETA of returning to it. I'm focusiong on other areas of expertise. Feel free to use, fork and contact me if needed.
 
 ### Roadmap
 What do I need to do and what is done.
