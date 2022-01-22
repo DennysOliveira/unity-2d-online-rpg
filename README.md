@@ -1,7 +1,11 @@
 ## Online Multiplayer RPG with an Authoritative Server
-### Description
-I'm aiming to create a game very much like what we have as MMORPGs though not as scalable as current MMORPGS as doing this requires a lot of time and expertise.
-My main goal is to earn experience on data manipulation at server-sided resources and learn some Unity on the way.
+![GitHub Repo size](https://img.shields.io/github/repo-size/bardsnight/unity-2d-online-rpg?style=flat-square)
+![GitHub Languages](https://img.shields.io/github/languages/count/bardsnight/unity-2d-online-rpg?style=flat-square)
+![GitHub Issues](https://img.shields.io/github/issues/bardsnight/unity-2d-online-rpg?style=flat-square)
+![GitHub Stars](https://img.shields.io/github/stars/bardsnight/unity-2d-online-rpg?style=flat-square)
+![License](https://img.shields.io/github/license/bardsnight/unity-2d-online-rpg?style=flat-square)
+> I'm aiming to create a game very much like what we have as MMORPGs though not as scalable as current MMORPGS as doing that requires a lot of time and expertise.
+> My main goal is to earn experience on data manipulation at server-sided resources and learn some Unity on the way.
 
 ### Project Status
 This project is currently paused without any ETA of returning to it. I'm focusiong on other areas of expertise. Feel free to use, fork and contact me if needed.
